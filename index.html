@@ -1,0 +1,2981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cyrus Cylinder | Royal LOD Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+
+        /* --- Smooth Scrolling --- */
+        html {
+            scroll-snap-type: y proximity;
+            scroll-behavior: smooth;
+        }
+        
+
+        :root {
+            --bg-dark-crimson: #2b0303; 
+            --bg-light-crimson: #4a0606; 
+            --royal-gold: #B8860B; 
+            --pale-gold: #f5eeda; 
+            --mid-gold: #d2ad47;
+            --persian-turquoise: #008080;
+            --text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        body {
+            background-color: var(--bg-dark-crimson);
+            color: var(--pale-gold);
+            font-family: 'Lora', serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Cinzel', serif;
+            color: var(--royal-gold);
+            text-shadow: var(--text-shadow);
+        }
+
+        /* --- Custom Navbar Style --- */
+        .navbar-royal {
+            background-color: rgba(0, 0, 0, 0.7); 
+            border-bottom: 1px solid var(--royal-gold);
+            padding: 15px 0;
+        }
+        .navbar-royal .navbar-brand { font-size: 1.5rem; font-weight: 700; }
+        .navbar-royal .nav-link { 
+            color: var(--pale-gold) !important; 
+            font-weight: 500; 
+            margin-left: 15px;
+            transition: color 0.3s;
+        }
+        .navbar-royal .nav-link:hover, .navbar-royal .nav-link.active {
+            color: var(--royal-gold) !important;
+        }
+
+        /* --- Imperial Hero Section --- */
+        .hero-section {
+            position: relative; /* انتقال یافته از پایین */
+            z-index: 10;        /* انتقال یافته از پایین */
+            overflow: hidden;   /* انتقال یافته از پایین - جلوگیری از بیرون زدن نورها */
+            background-color: var(--bg-dark-crimson);
+            background-image: linear-gradient(to bottom, rgba(43, 3, 3, 0.6), rgba(43, 3, 3, 0.85)), url('20101229_Gates_of_the_nations_Persepolis_Iran.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding: 190px 0; 
+            text-align: center;
+            border-bottom: 1px solid var(--royal-gold); /* اصلاح شد: خط حذف شد تا با تاریکی ادغام شود */
+            box-shadow: inset 0 -50px 80px rgba(0,0,0,0.9);
+        }
+
+        /* --- Hero Title & Link --- */
+        .hero-title-link {
+            text-decoration: none; /* حذف خط زیر لینک */
+            display: inline-block; /* برای اینکه انیمیشن روی متن درست کار کند */
+        }
+        
+        .hero-title {
+            font-size: 4rem; 
+            font-weight: 700; 
+            margin-bottom: 20px; 
+            letter-spacing: 2px;
+            transition: all 0.3s ease; /* حرکت نرم */
+            cursor: pointer;
+        }
+
+        /* درخشش شاهانه هنگام رفتن موس روی تیتر */
+        .hero-title:hover {
+            transform: scale(1.05); /* کمی بزرگ شدن */
+            text-shadow: 0 0 20px rgba(184, 134, 11, 0.8), 0 2px 4px rgba(0,0,0,0.5); 
+        }
+
+        /* --- Hero Typography --- */
+        .hero-section p.lead { 
+            font-size: 1.4rem; 
+            font-style: italic; 
+            color: var(--pale-gold); 
+            max-width: 800px; 
+            margin: 0 auto; /* عرض محدود و متمرکزسازی در وسط صفحه */
+            line-height: 1.8; 
+        }
+        /* --- Cinematic Spotlights (Punchy & Visible) --- */
+        .spotlight {
+            position: absolute;
+            bottom: -20vh;
+            width: 20vw;
+            height: 150vh;
+            /* نور را غلیظ‌تر کردیم (از 0.4 به 0.6) */
+            background: linear-gradient(0deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0) 80%);
+            border-radius: 50%;
+            
+            /* تاری را نصف کردیم تا ستونِ نور واضح‌تر دیده شود */
+            filter: blur(25px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .spotlight-left {
+            left: -15%;
+            transform-origin: bottom center;
+            /* سرعت را به ۴ ثانیه کاهش دادیم و important زدیم تا ویندوز جلویش را نگیرد */
+            animation: swayLeft 5s ease-in-out infinite alternate !important;
+        }
+
+        .spotlight-right {
+            right: -15%;
+            transform-origin: bottom center;
+            animation: swayRight 5s ease-in-out infinite alternate !important; 
+        }
+
+        /* دامنه‌ی حرکت را بسیار وسیع‌تر کردیم تا تکان خوردنش واضح باشد */
+        @keyframes swayLeft {
+            0% { transform: rotate(10deg) scaleY(1); }
+            100% { transform: rotate(55deg) scaleY(1.5); }
+        }
+
+        @keyframes swayRight {
+            0% { transform: rotate(-10deg) scaleY(1); }
+            100% { transform: rotate(-60deg) scaleY(1.5); }
+        }
+
+        /* --- New Artifact Section --- */
+        .artifact-section {
+            position: relative; /* این خط خیلی مهمه تا غبارها بیرون نزنن */
+            overflow: hidden;
+            background: linear-gradient(to bottom, var(--bg-dark-crimson) 0%, #000000 20%, #000000 80%, var(--bg-dark-crimson) 100%);
+            padding: 200px 0; 
+            text-align: center;
+            border: none; 
+            transition: all 1s ease-out; /* حرکت نرم ۱ ثانیه‌ای */
+        }
+
+        /* کلاسی که باعث ظاهر شدنِ منشور می‌شود */
+        .artifact-section.in-view {
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        /* استایل‌های متن و عکس (بدون تغییر) */
+        .artifact-section .section-title { font-family: 'Cinzel', serif; color: var(--royal-gold); font-size: 2.5rem; margin-bottom: 50px; text-shadow: var(--text-shadow); }
+        .artifact-img { max-width: 500px; height: auto; border: none; border-radius: 4px; box-shadow: 0 15px 50px rgba(0,0,0,1), 0 0 30px rgba(212, 175, 55, 0.15); transition: transform 0.3s; }
+        .artifact-img:hover { transform: scale(1.04); }
+
+        /* --- جدید: History & Metadata Tabs Section --- */
+        /* ۲. کادرِ دربرگیرنده‌ی هر مقاله */
+        .history-article {
+            margin-bottom: 90px; 
+            padding-bottom: 100px; 
+            font-family: 'Lora', serif; 
+            font-size: 1.1rem;
+            scroll-margin-top: 70px; 
+            padding-top: 50px;
+            scroll-snap-align: start;
+            line-height: 1.8;
+            text-align: justify;
+            min-height: 100vh; 
+            height: auto;
+            /* --- جادوی اسکرول: در ابتدا نامرئی و پایین هستند --- */
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out; /* سرعت ظاهر شدن */
+        }
+
+        .history-article h2 {
+            text-shadow: 
+                0 0 10px rgba(184, 134, 11, 0.9), 
+                0 0 20px rgba(184, 134, 11, 0.6), 
+                0 0 30px rgba(184, 134, 11, 0.4), 
+                0 2px 4px rgba(0,0,0,0.8);
+            transition: all 0.5s ease; /* برای اینکه درخشش هم نرم ظاهر شود */
+        }
+        /* این کلاس وقتی اسکرول بهشون می‌رسه بهشون اضافه میشه */
+        .history-article.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* --- About the Project Section (متمایز و متحرک) --- */
+        .about-project-section {
+            background-color: var(--bg-dark-crimson);
+            padding: 90px 0 90px 0;
+            text-align: center;
+            border-bottom: none;
+            margin-bottom: 100px;
+            scroll-snap-align: center;
+            /* --- تنظیمات انیمیشن --- */
+            opacity: 0; /* اول نامرئی باشه */
+            transform: translateY(30px); /* کمی پایین باشه */
+            transition: all 1s ease-out; /* با سرعت ۱ ثانیه ظاهر بشه */
+        }
+
+        /* کلاسی که جاوااسکریپت موقع اسکرول اضافه می‌کنه */
+        .about-project-section.in-view {
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        /* --- کادر فیروزه‌ایِ جدید --- */
+        .about-container {
+            border: 4px double #008080; /* کادر دوتایی فیروزه‌ای */
+            border-radius: 8px;
+            background: rgba(0, 128, 128, 0.08); /* پس‌زمینه محو فیروزه‌ای */
+            padding: 80px; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            box-shadow: 0 5px 20px rgba(0,128,128,0.15);
+        }
+
+        .about-project-title {
+            font-family: 'Cinzel', serif;
+            color: #008080; /* رنگ تیتر هم فیروزه‌ای شد */
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 55px;
+            letter-spacing: 2px;
+        }
+
+        .about-project-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 0 auto;
+            text-align: justify; 
+            text-align-last: center; 
+            color: var(--pale-gold);
+        }
+
+        /* --- Buttons & Features --- */
+        .btn-gold {
+            background-color: var(--royal-gold);
+            color: #2b0303 !important; 
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            border: 2px solid #2b0303;
+            transition: all 0.3s;
+        }
+        .btn-gold:hover { background-color: transparent; color: var(--royal-gold) !important; border-color: var(--royal-gold); }
+
+        .btn-outline-gold {
+            background-color: transparent;
+            color: var(--royal-gold) !important;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            border: 2px solid var(--royal-gold);
+            transition: all 0.3s;
+        }
+        .btn-outline-gold:hover { background-color: var(--royal-gold); color: #2b0303 !important; }
+
+        /* --- Author & Footer --- */
+        .author-section {
+            background-color: #1a0101; 
+            padding: 80px 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.3); 
+            margin-top: 80px;
+        }
+        .author-card { display: flex; align-items: center; justify-content: center; gap: 40px; max-width: 800px; margin: 0 auto; text-align: left; }
+        .author-img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 2px solid var(--royal-gold); box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
+        .author-info h3 { font-family: 'Cinzel', serif; color: var(--royal-gold); margin-bottom: 10px; font-size: 1.8rem; }
+        .author-info p { font-size: 1.1rem; line-height: 1.6; margin: 0; text-align: justify;}
+        @media (max-width: 768px) { .author-card { flex-direction: column; text-align: center; } }
+
+        .footer-royal {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: var(--royal-gold);
+            padding: 30px 0;
+            border-top: 1px solid var(--royal-gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+        }
+
+        /* --- Music Player Button --- */
+        .music-toggle {
+            position: fixed; bottom: 30px; right: 30px;
+            background-color: var(--bg-dark-crimson); color: var(--royal-gold);
+            border: 2px solid var(--royal-gold); padding: 12px 20px;
+            border-radius: 50px; font-family: 'Cinzel', serif; font-size: 1rem;
+            cursor: pointer; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        .music-toggle:hover { background-color: var(--royal-gold); color: var(--bg-dark-crimson); transform: scale(1.05); }
+        
+        /* --- New: Portrait Image Style for Cyrus --- */
+        .portrait-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            /* کادر و سایه‌ای ظریف، هماهنگ با بقیه‌ی عکس‌ها */
+            border: 1px solid var(--royal-gold);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            transition: all 0.4s ease; /* برای حرکت نرم */
+        }
+
+
+        .portrait-img:hover:hover {
+            transform: perspective 1000px scale(1.03) rotateY(10deg); /* عکس کمی جلو می‌آید و به چپ خم می‌شود */
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.7); /* هاله‌ی طلایی درخشان‌تر می‌شود */
+            filter: brightness(1.05); /* کمی روشن‌تر می‌شود */
+        }        
+
+        /* ۱. پایین‌ترین لایه: کادر اصلی غبارها (لایه ۵) */
+        #magic-dust-container {
+            position: fixed; 
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 5; 
+        }
+
+        /* ۲. لایه میانی: محتوای متنی (لایه ۲۰) + تنظیمات انیمیشن */
+        .artifact-section > .container,
+        .about-project-section > .container {
+            position: relative;
+            z-index: 20; 
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        /* اجرای انیمیشنِ محتوای لایه ۲۰ هنگام اسکرول */
+        .artifact-section.in-view > .container,
+        .about-project-section.in-view > .container {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* بقیه محتواها که انیمیشن ندارند اما باید در لایه ۲۰ باشند */
+        .history-section > .container,
+        .author-section > .container,
+        footer > .container {
+            position: relative;
+            z-index: 20; 
+        }
+        
+        /* ۳. بالاترین لایه: قفل کردنِ تمام عکس‌های حیاتی (لایه ۹۹) */
+        .artifact-img, 
+        .portrait-img, 
+        .hormuzd-portrait-img, 
+        .cyrus-texture-img {
+            position: relative !important;
+            z-index: 99 !important; 
+        }
+
+        /* --- استایل و حرکتِ خودِ غبارها --- */
+        .dust-particle { 
+            position: absolute; 
+            background-color: var(--royal-gold); 
+            border-radius: 50%; 
+            box-shadow: 0 0 8px 3px rgba(184, 134, 11, 0.7); 
+            animation: swirling-float linear infinite; 
+            opacity: 0; 
+        }
+
+        @keyframes swirling-float {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            25% { transform: translateY(-30vh) translateX(25vw) rotate(180deg); }
+            50% { transform: translateY(-60vh) translateX(-25vw) rotate(360deg); }
+            75% { transform: translateY(-90vh) translateX(20vw) rotate(540deg); }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-130vh) translateX(-10vw) rotate(720deg); opacity: 0; }
+        }
+        /* ========================================= */
+        /* استایل دکمه‌ها و طومارِ دینامیک (از پایین) */
+        /* ========================================= */
+        
+        /* --- کانتینرِ هوشمندِ دکمه‌ها (اصلاح شده) --- */
+        .royal-controls-wrapper {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000000;
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-dark-crimson);
+            border: 1.2px solid var(--royal-gold);
+            border-radius: 50px;
+            padding: 3px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.8);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            width: 120px; /* عرض اولیه */
+        }
+
+        /* وقتی کلاس active اضافه بشه عرض زیاد میشه */
+        .royal-controls-wrapper.active {
+            width: 210px; 
+            border-color: var(--royal-gold);
+        }
+
+        .control-btn {
+            background: transparent;
+            border: none;
+            color: var(--royal-gold);
+            padding: 10px 15px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .control-btn:hover { color: var(--pale-gold); transform: scale(1.05); }
+
+        /* جداکننده ظریف */
+        .divider {
+            width: 1px;
+            height: 25px;
+            background-color: rgba(184, 134, 11, 0.3);
+            display: none; 
+        }
+
+        .royal-controls-wrapper.active .divider { display: block; }
+
+        /* دکمه لیریکس در حالت عادی پنهان در کادر */
+        #lyrics-btn-trigger {
+            color: var(--pale-gold);
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .royal-controls-wrapper.active #lyrics-btn-trigger { 
+            visibility: visible;
+            opacity: 1; 
+        }
+
+        #lyrics-section {
+            padding: 60px 0;
+            transition: all 0.5s ease;
+        }
+
+        .lyric-stanza {
+            margin-bottom: 40px;
+            text-align: center;
+            border-bottom: 1px solid rgba(184, 134, 11, 0.2);
+            padding-bottom: 40px;
+        }
+        
+        /* تنظیمات پایه برای حرکت نرم خطوط */
+        .lyric-original span {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1.2rem;
+            line-height: 2.8;
+            transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+            display: inline-block; /* برای اینکه زوم بشه */
+        }
+
+        /* این کلاس وقتی آهنگ به خط میرسه اضافه میشه */
+        /* کلاسِ بهینه‌شده و شاهانه (درخششِ طلاییِ اصیل) */
+        .highlight-glow {
+            color:var(--royal-gold) !important; /* کلمه در حال پخش، سفید/کرمِ روشن میشه تا کاملاً خوانا باشه */
+            text-shadow: 
+                0 0 10px rgba(184, 134, 11, 0.9), /* یک هاله‌ی غلیظِ طلاییِ تاریک (Royal Gold) دور کلمه */
+                0 0 25px rgba(184, 134, 11, 0.5) !important; /* پخش شدنِ ملایمِ نور در پس‌زمینه */
+            transform: scale(1.04); /* کلمه یه کوچولو و خیلی نرم میاد جلو */
+            transition: all 0.4s ease;
+        }
+
+        /* تنظیمات پایه برای ترجمه انگلیسی */
+        .lyric-translation span {
+            transition: color 0.3s ease, text-shadow 0.3s ease, opacity 0.3s ease;
+            opacity: 0.6; /* در حالت عادی کمی محوتر باشد */
+        }
+
+        /* این کلاس همزمان با خط فارسی به ترجمه اضافه می‌شود */
+        .highlight-glow-translation {
+            color: var(--pale-gold) !important; /* رنگ کرم روشن */
+            text-shadow: 0 0 10px rgba(184, 134, 11, 0.7) !important;
+            opacity: 1 !important; /* کاملاً نمایان شود */
+        }
+
+        /* =========================================
+           PAHLAVI ERA (CONTEMPORARY MONTAGE)
+           ========================================= */
+        .contemporary-montage {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+            background-color: var(--bg-dark-crimson);
+            background-size: 60%;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.9s ease;
+        }
+
+        .contemporary-montage.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contemporary-montage::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(
+                to bottom, 
+                var(--bg-dark-crimson) 0%, 
+                rgba(0, 0, 0, 0.5) 8%, 
+                rgba(0, 0, 0, 0.85) 18%, 
+                rgba(0, 0, 0, 0.85) 85%, 
+                var(--bg-dark-crimson) 100%
+            );
+            z-index: 0;
+        }
+
+        /* --- ستون عکس‌ها --- */
+        .collage-column {
+            position: relative;
+            z-index: 1; 
+            padding: 50px;
+        }
+
+        /* --- ستون متن (یکپارچه و سینمایی) --- */
+        .text-column {
+            position: relative;
+            z-index: 1; 
+            padding: 80px 60px;
+            font-family: 'Lora', serif;
+            color: #f0f0f0; 
+            line-height: 2.2;
+            text-align: justify;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.9); /* سایه برای خوانایی روی تصویر */
+        }
+
+        .text-column .lead {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--royal-gold); /* رنگ طلایی برای درخشش روی پس‌زمینه تیره */
+            margin-bottom: 25px;
+        }
+
+        /* --- تنظیمات گالری پراکنده --- */
+        .scattered-gallery {
+            position: relative;
+            width: 100%;
+            min-height: 1200px; 
+        }
+
+        .photo-item {
+            position: absolute;
+            box-shadow: 10px 15px 30px rgba(0,0,0,0.6);
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            filter: grayscale(100%) contrast(110%);
+            cursor: pointer;
+            border-radius: 5px; 
+            overflow: hidden;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- موقعیت عکس‌ها --- */
+        .scattered-1 { width: 360px; height: 470px; top: 150px; left: 10px; z-index: 4; }
+        .scattered-2 { width: 310px; height: 400px; top: 110px; left: 370px; z-index: 1; }
+        .scattered-3 { width: 420px; height: 270px; top: 510px; left: 150px; z-index: 2; }
+        .scattered-4 { width: 280px; height: 370px; top: 400px; left: 550px; z-index: 3; }
+        .scattered-5 { width: 300px; height: 410px; top: 730px; left: 300px; z-index: 3; }
+
+        /* --- افکت‌های تعاملی --- */
+        .scattered-gallery:hover .photo-item:not(:hover) {
+            opacity: 0.3; 
+            filter: grayscale(100%) blur(3px);
+        }
+
+        .photo-item:hover {
+            opacity: 1 !important;
+            filter: grayscale(0%) !important; 
+            transform: scale(1.1); 
+            z-index: 100 !important; 
+            box-shadow: 15px 25px 40px rgba(0,0,0,0.9);
+        }
+        
+
+        /* --- ستون متن (سمت راست) --- */
+        .text-column {
+            padding: 80px 60px;
+            font-family: 'Lora', serif;
+            color: #ffffffeb;
+            line-height: 1.9;
+            text-align: justify;
+        }
+
+        .text-column .lead {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 25px;
+        }
+
+        .pasargad-divider {
+            position: relative;
+            height: 450px; /* ارتفاعِ عکسِ جداکننده */
+            background-image: url('pasargad.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* افکت پارالکس: عکس ثابت می‌ماند */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid var(--royal-gold);
+            border-bottom: 1px solid var(--royal-gold);
+            margin: 60px 0;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .pasargad-divider::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(43, 3, 3, 0.6); /* یک فیلتر شرابی/تاریک روی عکس برج */
+            z-index: 1;
+        }
+
+        /* --- Time Divider: Azadi Tower --- */
+        .time-divider {
+            position: relative;
+            height: 450px; /* ارتفاعِ عکسِ جداکننده */
+            background-image: url('azadi_tower.jpg'); /* اسم عکس برج آزادی */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* افکت پارالکس: عکس ثابت می‌ماند */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid var(--royal-gold);
+            border-bottom: 1px solid var(--royal-gold);
+            margin: 60px 0;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .time-divider::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(43, 3, 3, 0.6); /* یک فیلتر شرابی/تاریک روی عکس برج */
+            z-index: 1;
+        }
+
+        .divider-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            color: var(--pale-gold);
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+            opacity: 0.5 !important;
+        }
+
+        /* =========================================
+           THEORETICAL MODEL SECTION
+           ========================================= */
+        .theoretical-model-section {
+            font-family: 'Lora', serif; /* فونت هماهنگ با بقیه متن‌های سایت */
+            line-height: 1.8;
+            position: relative; 
+            z-index: 10;
+            color: var(--pale-gold); /* رنگ متن روشن روی پس‌زمینه تاریک */
+            background-color: rgba(15, 0, 0, 0.85); /* پس‌زمینه تیره هماهنگ با تم */
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 40px;
+            border: 1px solid rgba(184, 134, 11, 0.3); /* حاشیه ظریف طلایی */
+            border-radius: 12px;
+            box-shadow: inset 0 5px 20px rgba(0,0,0,0.9), 0 10px 30px rgba(0,0,0,0.6);
+            transition: all 0.4s ease;
+            text-align: justify;
+        }
+
+        /* افکت بزرگ شدنِ کل باکس وقتی موس روی آن می‌رود */
+        .theoretical-model-section:hover {
+            transform: translateY(-5px);
+            box-shadow: inset 0 5px 20px rgba(0,0,0,0.9), 0 15px 40px rgba(0,0,0,0.8);
+            border-color: var(--royal-gold);
+        }
+
+        .model-title {
+            color: var(--royal-gold);
+            font-family: 'Cinzel', serif;
+            padding-bottom: 25px;
+            margin-bottom: 15px;
+            text-align: left;
+            font-size: 2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* --- جادوی زوم عکس --- */
+        .model-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-bottom: 90px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            cursor: zoom-in; /* تغییر شکل موس به ذره‌بین */
+            transition: transform 0.8s ease, box-shadow 0.5s ease;
+            position: relative;
+            z-index: 8;
+        }
+
+        /* وقتی موس روی عکس می‌رود، ۱.۶ برابر بزرگ می‌شود و می‌آید روی بقیه اجزا */
+        .model-image:hover {
+            transform: scale(1.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,1);
+        }
+
+        /* =========================================
+           KNOWLEDGE GRAPH TRIPLES TABLE
+           ========================================= */
+        /* =========================================
+           جدول سه‌گانه‌ها - تم مینیمال و تاریک
+           ========================================= */
+        .uri-documentation-box {
+            background-color: rgba(10, 0, 0, 0.95); /* پس‌زمینه کمی تاریک‌تر و عمیق‌تر */
+            border: 1px solid rgba(184, 134, 11, 0.5); /* حاشیه طلایی ظریف‌تر شد */
+            border-radius: 12px;
+            padding: 35px;
+            margin: 40px auto;
+            max-width: 900px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            direction: ltr;
+        }
+
+        /* تیتر دسته‌بندی‌ها */
+        .uri-category {
+            font-family: 'Cinzel', serif;
+            color: var(--royal-gold);
+            border-bottom: 1px solid rgba(184, 134, 11, 0.2); /* خط زیرین خیلی محو و شیک شد */
+            padding-bottom: 8px;
+            margin: 30px 0 20px 0;
+            font-size: 1.4rem;
+            text-align: left;
+        }
+
+        /* ظرف اصلی جدول */
+        .triples-scroll-area {
+            max-height: 400px;
+            overflow-y: auto;
+            overflow-x: auto; /* برای جلوگیری از به هم ریختن آدرس‌های طولانی */
+            border: 1px solid rgba(184, 134, 11, 0.2);
+            border-radius: 6px;
+            margin-top: 20px;
+            background: rgba(5, 0, 0, 0.8); /* بک‌گراند تاریک دقیقاً مثل کنسول کد */
+            -webkit-overflow-scrolling: touch; 
+        }
+
+        /* --- نوار اسکرول شخصی‌سازی‌شده (طلایی و تاریک) --- */
+        .triples-scroll-area::-webkit-scrollbar { width: 8px; height: 8px; }
+        .triples-scroll-area::-webkit-scrollbar-track { background: #050000; border-radius: 4px; }
+        .triples-scroll-area::-webkit-scrollbar-thumb { background: rgba(184, 134, 11, 0.5); border-radius: 4px; }
+        .triples-scroll-area::-webkit-scrollbar-thumb:hover { background: var(--royal-gold); }
+
+        /* جدول */
+        .uri-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin: 0; 
+        }
+
+        /* هدر جدول - تغییر از نوار طلایی به نوار تاریک مینیمال */
+        .uri-table th {
+            background-color: rgba(15, 0, 0, 0.95); /* پس‌زمینه تاریک شد */
+            color: var(--royal-gold); /* متن طلایی شد */
+            border-bottom: 1px solid rgba(184, 134, 11, 0.5); /* یک خط طلایی ظریف زیر هدر */
+            position: sticky;
+            top: 0;
+            padding: 12px;
+            text-align: left;
+            z-index: 10;
+        }
+
+        /* ردیف‌های جدول */
+        .uri-table td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(184, 134, 11, 0.05); /* خطوط بین ردیف‌ها بسیار نامحسوس شد */
+            color: var(--pale-gold);
+            word-break: break-all;
+        }
+
+        /* افکت هاور بسیار ملایم (حذف رنگ جیغ فیروزه‌ای) */
+        .uri-table tr:hover {
+            background: rgba(184, 134, 11, 0.08); /* یه هاله طلایی خیلی محو می‌ندازه */
+        }
+
+        /* مقادیر متنی */
+        .literal-value {
+            font-size: 1rem;
+            color: var(--persian-turquoise);
+            font-style: italic;
+        }
+
+        /* =========================================
+           استایل اختصاصی برای اسکرولِ کنسول کد (Turtle)
+           ========================================= */
+        .rdf-code-area {
+            max-height: 460px; /* تعیین ارتفاع برای ظاهر شدن اسکرول */
+            overflow-y: auto;  /* اسکرول عمودی */
+            overflow-x: auto;
+            padding: 20px;
+            margin: 10px;
+            border: 2px solid rgba(184, 134, 11, 0.4);
+            background-color: rgba(5, 0, 0, 0.8); /* بک‌گراند تیره برای کادر کد */
+            border-radius: 10px;
+        }
+
+        /* زیباسازی نوار اسکرول برای کنسول کد */
+        .rdf-code-area::-webkit-scrollbar { 
+            width: 8px; 
+            height: 8px; 
+        }
+        
+        .rdf-code-area::-webkit-scrollbar-track { 
+            background: #050000; 
+            border-radius: 4px;
+        }
+        
+        .rdf-code-area::-webkit-scrollbar-thumb { 
+            background: rgba(184, 134, 11, 0.5); /* رنگ طلایی نیمه‌شفاف */
+            border-radius: 4px; 
+        }
+        
+        .rdf-code-area::-webkit-scrollbar-thumb:hover { 
+            background: var(--royal-gold); /* روشن شدن در حالت هاور */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="magic-dust-container"></div>
+    <nav class="navbar navbar-expand-lg navbar-royal">
+        <div class="container-fluid">
+            
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#theoretical-model">Knowledge Organization</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#RDF-production">Knowledge Representation</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        
+        <div class="spotlight spotlight-left"></div>
+        <div class="spotlight spotlight-right"></div>
+
+        <div class="container" style="position: relative; z-index: 2;">
+            
+            <a href="#artifact-target" class="hero-title-link">
+                <h1 class="display-3 hero-title">The Cyrus Cylinder</h1>
+            </a>
+            
+            <p class="lead mt-3 text-nowrap">From Ancient Clay to the Semantic Web, Rooted in the Heritage of My Homeland, Iran</p>
+            <p class="mt-4" style="margin: 0 auto; color: var(--pale-gold);">
+                A Linked Open Data Project
+            </p>
+            
+            <div class="mt-5">
+                <a href="#theoretical-model" class="btn btn-outline-gold btn-lg px-4 ms-3">Explore the Graphs</a>
+                <a href="https://github.com/callmesevda/DHDK-Cyrus-Project" class="btn btn-outline-gold btn-lg px-4 ms-3">Project Documentation</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="artifact-section" id="artifact-target">
+        
+        <div class="container">
+            <div class="row align-items-center justify-content-center mt-5">
+                <div class="col-md-5 text-center">
+                    <a href="#history-target" style="text-decoration: none;">
+                        <img src="cyrus.jpg" class="artifact-img img-fluid" alt="The Cyrus Cylinder - Front View">
+                    </a>
+                </div>
+
+                <div class="col-md-5 text-center">
+                    <a href="#history-target" style="text-decoration: none;">
+                        <img src="cyrus_back.jpg" class="artifact-img img-fluid" alt="The Cyrus Cylinder - Back View">
+                    </a>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="text-center">
+                    <a href="#history-target" style="color: var(--royal-gold); text-decoration: none; font-family: 'Cinzel', serif; font-size: 1.1rem; opacity: 0.9;">
+                        <i class="fas fa-chevron-down"></i> Click on the artifact to explore its history
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="history-section" id="history-target">
+        <div class="container">
+
+            <div class="history-article">
+                <h2 class="article-title mb-5 text-center">A Legacy in Clay</h2>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        
+                        <div class="mb-5" style="max-width: 850px;">
+                            <p style="color: var(--mid-gold); font-style: italic; font-size: 1.1rem; line-height: 1.8;">
+                                "You could almost say that the Cyrus Cylinder is a history of the Middle East in one object... It is the first attempt we know about running a society with different nationalities and faiths—a new kind of statecraft."
+                            </p>
+                            <span style="color: var(--mid-gold); font-size: 0.8rem; letter-spacing: 1px; font-weight: 500;"><em>- Neil MacGregor, Former Director of the British Museum</em></span>
+                        </div>
+
+                        <div class="clearfix mb-4">
+                            <p>The Cyrus Cylinder is a profound artifact from the Achaemenid Period, taking the form of a barrel-shaped cylinder made of baked clay. Created around the 6th century BC as a foundation deposit, it bears a royal inscription written in the Akkadian language using cuneiform script. Today, the artifact exists in two reunited fragments ("A" and "B") and is currently housed in the British Museum. It was unearthed in March 1879 by the Assyro-British archaeologist Hormuzd Rassam, who discovered it during excavations within the foundations of the Ésagila, the main temple of ancient Babylon.</p>
+                        </div>
+
+                        <div class="clearfix mb-3">
+                            <img src="cyrus_portrait.jpg" class="portrait-img float-md-end ms-md-4 mb-3" alt="Cyrus the Great" style="width: 250px;">
+                            <p>The inscription's historical narrative centers on the Persian king <strong>Cyrus the Great</strong> and his conquest of Babylon in 539 BC. Across its 45 formulaic lines, the text praises Cyrus while denouncing the deposed Neo-Babylonian king, Nabonidus, as an impious oppressor. The victorious Cyrus is portrayed as the chosen savior appointed by the chief Babylonian god, Marduk, to restore peace and order to the Babylonian people.</p>
+                            <p>The text details Cyrus's peaceful entry into the city, includes a prayer to Marduk for the protection of Cyrus and his son, Cambyses, and extols Cyrus's efforts to repatriate displaced peoples and restore destroyed sanctuaries.</p>
+                        </div>
+
+                        <div class="clearfix">
+                            <p>This policy of repatriation has deeply connected the Cylinder to Biblical history. The Bible, specifically the Book of Ezra, records that the Jewish people—who had been exiled to Babylon by the earlier king Nebuchadnezzar—were permitted to return to Jerusalem to rebuild their Temple following an edict from Cyrus. While the exact biblical edicts (recorded in Hebrew and Aramaic) differ in tone from the Cylinder, the artifact's text is widely seen as historical corroboration of Cyrus's tolerant policies toward exiled nations.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="pasargad-divider">
+        <div class="divider-content"><span>Pasargadae</span></div>
+    </section>
+
+    <section class="contemporary-montage">
+            <div class="row m-0">
+                
+                <div class="col-md-7 collage-column">
+                    <div class="scattered-gallery">
+                        <div class="photo-item scattered-1">
+                            <img src="shah-portrait-main.jpg" alt="Shah Portrait Main">
+                        </div>
+                        
+                        <div class="photo-item scattered-2">
+                            <img src="shah-farah.jpg" alt="Shah and Farah Pahlavi">
+                        </div>
+                        
+                        <div class="photo-item scattered-3">
+                            <img src="iran-symbol.jpg" alt="Symbol of Iran">
+                        </div>
+                        
+                        <div class="photo-item scattered-4">
+                            <img src="shah-portrait-second.jpg" alt="Shah Portrait Secondary">
+                        </div>
+
+                        <div class="photo-item scattered-5">
+                            <img src="shah-farah-vertical.jpg" alt="Shah and Farah Vertical Large">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 mt-5 text-column">
+                    <p>The Cyrus Cylinder was dubbed the "first declaration of human rights" by the pre-Revolution Iranian government, a reading prominently advanced by Shah Mohammed Reza Pahlavi, in a 1967 book, The White Revolution of Iran. The Shah identified Cyrus as a key figure in government ideology and associated his government with the Achaemenids. He wrote that "the history of our empire began with the famous declaration of Cyrus, which, for its advocacy of humane principles, justice and liberty, must be considered one of the most remarkable documents in the history of mankind." The Shah described Cyrus as the first ruler in history to give his subjects "freedom of opinion and other basic rights". In 1968, the Shah opened the first United Nations Conference on Human Rights in Tehran by saying that the Cyrus Cylinder was the precursor to the modern Universal Declaration of Human Rights.</p>
+                    <p>In his 1971 Nowruz speech, the Shah declared 1350 AP (1971–1972) "Cyrus the Great Year," launching a grand commemoration of 2,500 years of Persian monarchy. Designed to showcase modern Iran's contributions to world civilization, this vision was physically immortalized through the construction of the iconic Shahyad Tower (now Azadi Tower) in the capital. The Shah explicitly linked his reign to Cyrus, viewing the Achaemenid period as "a moment from the national past that could best serve as a model and a slogan for the imperial society he hoped to create." Beyond this political era, the Cylinder's global resonance endures; in a 2011 TED Talk, former British Museum director Neil MacGregor famously called it "a history of the Middle East in one object," cementing its legacy as a timeless symbol of statecraft and tolerance.</p>
+                </div>
+                
+            </div>
+    </section>
+
+    <section class="time-divider">
+        <div class="divider-content"><span>Azadi Tower</span></div>
+    </section>
+    
+    <section class="about-project-section">
+        <div class="container">
+            <div class="about-container">
+                <h2 class="about-project-title">ABOUT THE PROJECT</h2>
+                <p class="about-project-text">
+                    The Cyrus Cylinder: A Linked Open Data Ecosystem
+                    developed for the Information Science and Cultural Heritage course within the Digital Humanities and Digital Knowledge (DHDK) Master's program at the University of Bologna, this project bridges an ancient history with modern web architecture. It transcends a traditional static archive by transforming the Cyrus Cylinder—its provenance, textual structure, and profound historical and political legacy—into a dynamic, machine-readable Semantic Knowledge Graph.
+                    Beyond structural metadata and Linked Open Data (LOD) methodologies, the project offers an immersive digital narrative. Through a continuous, cinematic user experience, it maps the artifact's temporal journey.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="theoretical-model-section" id="theoretical-model">
+        <h2 class="model-title">The Theoretical Model</h2>
+        
+        <div class="model-intro">
+            <p>This section presents the theoretical model underlying our ontology. The Knowledge Graph was conceptualized by extracting core entities, relations, and data properties directly from our TEI/XML markup of the Wikipedia entry on the Cyrus Cylinder. However, to ensure a comprehensive domain representation, the model intentionally extends beyond this primary corpus to integrate external entities, capturing a broader historical, political, and cultural context.</p>
+        </div>
+
+        <figure class="model-figure">
+            <img class="model-image" src="theoretical_model.png" alt="Theoretical Model of the Cyrus Cylinder Knowledge Graph">
+        </figure>
+
+        <h2 class="model-title">The Conceptual Model</h2>
+        
+        <div class="model-intro">
+            <p>Building upon the theoretical framework, the Conceptual Model maps our extracted entities and relationships at a higher level of abstraction through a strategic multi-ontology approach. While CIDOC-CRM and FRBRoo serve as the primary backbone to provide robust semantics for modeling historical artifacts, events, and complex textual lifecycles, Schema.org is integrated as a supplementary vocabulary. This integration successfully bridges the gap created by the structural rigidities of cultural heritage ontologies, allowing for a more flexible and comprehensive representation of generic or contemporary web relationships and external entities within our Linked Open Data ecosystem.</p>
+        </div>
+
+        <figure class="model-figure">
+            <img class="model-image" src="conceptual_model.png" alt="Conceptual Model of the Cyrus Cylinder Knowledge Graph">
+        </figure>
+
+
+        <div class="container mt-5" id="RDF-production">
+            <h2 class="model-title">RDF Production</h2>
+
+                <p>The subsequent phase translated our conceptual model into a machine-readable Linked Open Data architecture by serializing the extracted entities and relationships into an RDF graph using Turtle (.ttl) syntax. To ensure robustness and interoperability, this production was driven by a systematic URI minting strategy that defined custom namespaces (such as data: and ext:) for all domain-specific entities. Furthermore, to prevent our Knowledge Graph from remaining an isolated silo, we actively bridged it to the global Semantic Web by implementing owl:sameAs, crm:P1_is_identified_by and skos:exactMatch properties, precisely reconciling our internal entities with major international authority records including Wikidata, VIAF, and Pleiades.</p>
+
+                
+                <pre class="rdf-code-area" style="max-height: 400px; overflow-y: auto; overflow-x: auto;"><code id="turtleCodeBlock">Loading Knowledge Graph data...</code></pre>
+            </div>
+    
+            <div class="uri-documentation-box">
+                
+                <hr style="border-color: var(--royal-gold); opacity: 0.3; margin: 10px 0;">
+
+                <h2 class="uri-category">Extracted Triples As URIs</h2>
+                <div class="triples-scroll-area">
+                    <table class="uri-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Predicate</th>
+                                <th>Object</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/irving_finkel&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P107i_is_current_or_former_member_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/british_museum&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_2013&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/discovery_of_cylinder&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P2_has_type&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/getty_aat_300404386&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/cyrus_cylinder_text&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;The Abstract Text of Cyrus Cylinder&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/nebuchadnezzar&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E21_Person&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/celebration_2500&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;2,500 year celebration of the Persian Empire&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/neil_macgregor&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E21_Person&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/hormuzd_rassam&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E21_Person&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/freedom_religion&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.w3.org/2004/02/skos/core#Concept&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/universal_rights&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by&gt;</td>
+                                <td>&lt;https://viaf.org/en/viaf/183452328&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/irving_finkel&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q14655584&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/ashraf_pahlavi&gt;</td>
+                                <td>&lt;http://schema.org/sibling&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/mohammad_pahlavi&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/achaemenid_period&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Achaemenid Period&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_1879&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/book_of_ezra&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by&gt;</td>
+                                <td>&lt;https://viaf.org/en/viaf/315943963&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/burial_of_cyrus&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E5_Event&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://viaf.org/viaf/311113679&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E42_Identifier&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/yale_peabody_museum&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q122945&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/neil_macgregor&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P107i_is_current_or_former_member_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/british_museum&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cuneiform&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q401&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/national_museum_iran&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;National Museum of Iran&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/british_museum&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E74_Group&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/burial_of_cyrus&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/pasargadae&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;https://viaf.org/en/viaf/315943963&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E42_Identifier&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/tehran_exhibition_event&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E7_Activity&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/aramaic_language&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Aramaic Language&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/u_thant&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E21_Person&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/liberation_of_jews&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_538_bc&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/getty_exhibition_event&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E7_Activity&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/book_of_ezra&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://iflastandards.info/ns/fr/frbr/frbroo/F2_Expression&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/jewish_people&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E74_Group&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/babylonian_exile_event&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/period_597_538_bc&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_states&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q30&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylon&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Babylon&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/irving_finkel&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E21_Person&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/marduk&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q190123&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/new_york&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P89_falls_within&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_states&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/ted_talk_2011&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_2011&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/hormuzd_rassam&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q1285498&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/irving_finkel&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Irving Finkel&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/achaemenid_period&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E5_Event&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_1879&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;1879&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/burial_of_cyrus&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Burial of Cyrus&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/los_angeles&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Los Angeles&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/us_exhibition_tour&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E7_Activity&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/met_exhibition_event&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/met_museum&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/tehran&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P89_falls_within&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/iran&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/burial_of_cyrus&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_great&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/yale_exhibition_event&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Yale Exhibition Event&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/universal_rights&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Universal Declaration of Human Rights&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/met_museum&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E74_Group&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/hebrew_language&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Hebrew Language&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/bible&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/book_of_ezra&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/esagila&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P89_falls_within&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylon&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/freedom_religion&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Freedom of Religion&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/universal_rights&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P129_is_about&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/human_rights&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/met_museum&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P74_has_current_or_former_residence&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/new_york&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_539_bc&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/british_museum&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;British Museum&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/universal_rights&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P129_is_about&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/freedom_religion&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/getty_museum&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;J. Paul Getty Museum&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/epigraphy&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q181260&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/liberation_of_jews&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Return to Zion / Liberation of Jews&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/cyrus_cylinder_text&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P67_refers_to&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/human_rights&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_great&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P107i_is_current_or_former_member_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/achaemenid_empire&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P128_carries&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/cyrus_cylinder_text&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/aramaic_language&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q28602&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/conquest_of_babylon&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_great&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/cyrus_cylinder_text&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P67_refers_to&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/freedom_religion&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_1971&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/us_exhibition_tour&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P9_consists_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/met_exhibition_event&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/jewish_people&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q7325&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylon&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/united_kingdom&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q145&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/babylonian_exile_event&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Babylonian Exile Event&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/ashraf_pahlavi&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q2419984&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cambyses&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P152_has_parent&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_great&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/achaemenid_empire&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E74_Group&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/unesco&gt;</td>
+                                <td>&lt;http://schema.org/parentOrganization&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_nations&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/british_museum&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q6373&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/san_francisco&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;San Francisco&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/liberation_of_jews&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_great&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/bible&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by&gt;</td>
+                                <td>&lt;http://viaf.org/viaf/174429434&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/ted_talk_2011&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;TEDGlobal 2011&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/irving_finkel&gt;</td>
+                                <td>&lt;http://schema.org/knowsAbout&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cuneiform&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/pasargadae&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q230025&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/tehran_exhibition_event&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/tehran&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://viaf.org/viaf/174429434&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E42_Identifier&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/washington_dc&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q61&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/universal_rights&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P130_shows_features_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cambyses&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Cambyses II&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/mohammad_pahlavi&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by&gt;</td>
+                                <td>&lt;https://viaf.org/en/viaf/64009470&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/bible&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://iflastandards.info/ns/fr/frbr/frbroo/F2_Expression&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/washington_dc&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/marduk&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://iflastandards.info/ns/fr/frbr/frbroo/F38_Character&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;https://viaf.org/en/viaf/183452328&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E42_Identifier&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/discovery_of_cylinder&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Excavation and Discovery of the Cylinder&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/nabonidus&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P107i_is_current_or_former_member_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylonian_people&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cuneiform&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Cuneiform&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/production_of_cylinder&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_great&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylonian_people&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Babylonians&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/book_of_ezra&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P72_has_language&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/aramaic_language&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/san_francisco&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_2013&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;2013&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/pasargadae&gt;</td>
+                                <td>&lt;http://www.w3.org/2004/02/skos/core#exactMatch&gt;</td>
+                                <td>&lt;https://pleiades.stoa.org/places/922693&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_states&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Cyrus Cylinder&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/discovery_of_cylinder&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/esagila&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/national_museum_iran&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E74_Group&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/tehran&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Tehran&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/liberation_of_jews&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P11_had_participant&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/jewish_people&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/video_recording_2600&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q22999276&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/getty_museum&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P74_has_current_or_former_residence&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/los_angeles&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/national_museum_iran&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q1631008&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/san_francisco&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q62&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/marduk&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by&gt;</td>
+                                <td>&lt;http://viaf.org/viaf/10640869&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/cyrus_cylinder_text&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P2_has_type&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cuneiform&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/u_thant&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by&gt;</td>
+                                <td>&lt;http://viaf.org/viaf/25398205&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/epigraphy&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Epigraphy&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://viaf.org/viaf/10640869&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E42_Identifier&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/book_of_ezra&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P72_has_language&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/hebrew_language&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/babylonian_exile_event&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q175447&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/un_copy_artifact&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://iflastandards.info/ns/fr/frbr/frbroo/F4_Manifestation_Singleton&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/book_of_ezra&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P67_refers_to&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylon&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/irving_finkel&gt;</td>
+                                <td>&lt;http://schema.org/knowsAbout&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/epigraphy&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/london_city&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q84&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/presentation_to_un&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/un_copy_artifact&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/discovery_of_cylinder&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/universal_rights&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://iflastandards.info/ns/fr/frbr/frbroo/F2_Expression&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/met_exhibition_event&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;MET Exhibition Event&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/achaemenid_empire&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q389688&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/unesco&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;UNESCO&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/universal_rights&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q7813&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_nations&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P74_has_current_or_former_residence&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/new_york&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/babylonian_exile_event&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E7_Activity&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_2011&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;2011&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/new_york&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/united_kingdom&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;https://viaf.org/en/viaf/148503682&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E42_Identifier&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/nebuchadnezzar&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Nebuchadnezzar&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylonian_people&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q797930&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/us_exhibition_tour&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;The US Exhibition Tour&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/iraq&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q796&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/presentation_to_un&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/ashraf_pahlavi&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/iran&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Iran&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/pasargadae&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Pasargadae&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/u_thant&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;U Thant&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/irving_finkel&gt;</td>
+                                <td>&lt;http://schema.org/knowsLanguage&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/akkadian_language&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/ashraf_pahlavi&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P107i_is_current_or_former_member_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/pahlavi_dynasty&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_2011&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/baked_clay&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E57_Material&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/cyrus_cylinder_text&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P67_refers_to&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/marduk&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/nabonidus&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q239414&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/mohammad_pahlavi&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Mohammad Reza Pahlavi&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/conquest_of_babylon&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P11_had_participant&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/nabonidus&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/marduk&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Marduk&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/mohammad_pahlavi&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q128245&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/book_of_ezra&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P67_refers_to&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/jewish_people&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/discovery_of_cylinder&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E7_Activity&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/new_york&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q60&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/los_angeles&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/celebration_2500&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/mohammad_pahlavi&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E22_Human-Made_Object&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/liberation_of_jews&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q2891592&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/presentation_to_un&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P11_had_participant&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_nations&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/production_of_cylinder&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P108_has_produced&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/getty_aat_300404386&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Discoveries (Events)&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/yale_peabody_museum&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E74_Group&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_538_bc&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;538 BC&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_nations&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E74_Group&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/met_exhibition_event&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E7_Activity&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/pahlavi_dynasty&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Pahlavi Dynasty&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/washington_dc&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Washington D.C.&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/epigraphy&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.w3.org/2004/02/skos/core#Concept&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_539_bc&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;539 BC&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/presentation_to_un&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E7_Activity&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/us_exhibition_tour&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P9_consists_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/getty_exhibition_event&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/bible&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q1845&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/los_angeles&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P89_falls_within&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_states&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/freedom_religion&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q171899&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/bible&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;The Bible&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://viaf.org/viaf/57045736&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E42_Identifier&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/british_museum&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P74_has_current_or_former_residence&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/london_city&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/los_angeles&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q65&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/book_of_ezra&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P67_refers_to&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_great&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/nebuchadnezzar&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q12591&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/getty_exhibition_event&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/getty_museum&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/conquest_of_babylon&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Fall of Babylon (539 BC)&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/iraq&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/death_of_cyrus&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q5962880&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/unesco&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q7809&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/iraq&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Iraq&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/celebration_2500&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/azadi_tower&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/irving_finkel&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by&gt;</td>
+                                <td>&lt;https://viaf.org/en/viaf/92992175&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/pasargadae&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/period_597_538_bc&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;597 - 538 BC&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://viaf.org/viaf/54149294488180522886&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E42_Identifier&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/united_kingdom&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;United Kingdom&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/presentation_to_un&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Gift of Replica to UN&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_great&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q8423&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/human_rights&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.w3.org/2004/02/skos/core#Concept&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylonia&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/iran&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/achaemenid_geography&gt;</td>
+                                <td>&lt;http://www.w3.org/2004/02/skos/core#exactMatch&gt;</td>
+                                <td>&lt;https://pleiades.stoa.org/places/753898782&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/period_597_538_bc&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylonian_people&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E74_Group&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/achaemenid_geography&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Achaemenid Empire&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/tehran_exhibition_event&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/national_museum_iran&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/human_rights&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q8458&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/hebrew_language&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q9288&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/achaemenid_period&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q114867307&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_nations&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q1065&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/ted_talk_2011&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E7_Activity&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/ashraf_pahlavi&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Ashraf Pahlavi&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/conquest_of_babylon&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylon&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/nabonidus&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Nabonidus&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/us_exhibition_tour&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P9_consists_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/yale_exhibition_event&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/getty_exhibition_event&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Getty Exhibition Event&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylonia&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q47690&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/london_city&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;London&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/esagila&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q928707&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylon&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q5684&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/book_of_ezra&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Book of Ezra&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/babylonian_exile_event&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P11_had_participant&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/jewish_people&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/tehran&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q3616&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/us_exhibition_tour&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylonia&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Babylonia&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/babylonian_exile_event&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/nebuchadnezzar&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/iran&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q794&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/pahlavi_dynasty&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q207991&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/conquest_of_babylon&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q28169617&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/conquest_of_babylon&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_539_bc&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P50_has_current_keeper&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/british_museum&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/new_york&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;New York City&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/achaemenid_geography&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylon&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P89_falls_within&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylonia&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/aramaic_language&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E56_Language&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/discovery_of_cylinder&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/hormuzd_rassam&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_538_bc&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/neil_macgregor&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q1226759&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/production_of_cylinder&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E12_Production&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/celebration_2500&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/u_thant&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q1264&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/pasargadae&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P89_falls_within&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/achaemenid_geography&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylon&gt;</td>
+                                <td>&lt;http://www.w3.org/2004/02/skos/core#exactMatch&gt;</td>
+                                <td>&lt;https://pleiades.stoa.org/places/893951&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/nabonidus&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by&gt;</td>
+                                <td>&lt;https://viaf.org/en/viaf/148503682&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/unesco&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E74_Group&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cambyses&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q182483&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/book_of_ezra&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q131635&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cambyses&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E21_Person&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/ashraf_pahlavi&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E21_Person&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P45_consists_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/baked_clay&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/un_copy_artifact&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;UN Replica of Cyrus Cylinder&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/hormuzd_rassam&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Hormuzd Rassam&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/azadi_tower&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Azadi Tower&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/getty_aat_300404386&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;http://vocab.getty.edu/page/aat/300404386&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/celebration_2500&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_1971&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/mohammad_pahlavi&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E21_Person&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/production_of_cylinder&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Production of Cylinder&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;https://viaf.org/en/viaf/32378701&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E42_Identifier&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/achaemenid_empire&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Achaemenid Empire&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_states&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;United States&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/getty_museum&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E74_Group&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/un_copy_artifact&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P130_shows_features_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;https://viaf.org/en/viaf/64009470&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E42_Identifier&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/hormuzd_rassam&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P107i_is_current_or_former_member_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/british_museum&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/met_museum&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Metropolitan Museum of Art&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/pahlavi_dynasty&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E74_Group&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/akkadian_language&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Akkadian Language&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/london_city&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/national_museum_iran&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P74_has_current_or_former_residence&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/tehran&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/hormuzd_rassam&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by&gt;</td>
+                                <td>&lt;https://viaf.org/en/viaf/32378701&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/mohammad_pahlavi&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P107i_is_current_or_former_member_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/pahlavi_dynasty&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/ted_talk_2011&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P94_has_created&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/video_recording_2600&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/celebration_2500&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E7_Activity&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/hebrew_language&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E56_Language&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_great&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by&gt;</td>
+                                <td>&lt;http://viaf.org/viaf/311113679&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/babylon&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P89_falls_within&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/iraq&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/baked_clay&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Baked Clay&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/us_exhibition_tour&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_2013&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/akkadian_language&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E56_Language&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/jewish_people&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Jews&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/cyrus_cylinder_text&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P72_has_language&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/akkadian_language&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/san_francisco&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P89_falls_within&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_states&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/video_recording_2600&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://iflastandards.info/ns/fr/frbr/frbroo/F2_Expression&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_great&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Cyrus the Great&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_great&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E21_Person&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/esagila&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Esagila&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/getty_museum&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q731126&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/akkadian_language&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q35518&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/video_recording_2600&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;2600 Years of History in One Object&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cuneiform&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.w3.org/2004/02/skos/core#Concept&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://viaf.org/viaf/25398205&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E42_Identifier&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/ashraf_pahlavi&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by&gt;</td>
+                                <td>&lt;http://viaf.org/viaf/57045736&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/liberation_of_jews&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E7_Activity&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;https://viaf.org/en/viaf/92992175&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E42_Identifier&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/esagila&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/production_of_cylinder&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P10_falls_within&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/achaemenid_period&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/neil_macgregor&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Neil MacGregor&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/presentation_to_un&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P17_was_motivated_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/universal_rights&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cambyses&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by&gt;</td>
+                                <td>&lt;http://viaf.org/viaf/54149294488180522886&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/cyrus_cylinder_text&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://iflastandards.info/ns/fr/frbr/frbroo/F2_Expression&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/ted_talk_2011&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/neil_macgregor&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/yale_peabody_museum&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Yale Peabody Museum&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/celebration_2500&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q217824&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/azadi_tower&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E25_Man-Made_Feature&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/london_city&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P89_falls_within&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/united_kingdom&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/death_of_cyrus&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Death of Cyrus&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_nations&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;United Nations&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_1971&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;1971&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/yale_exhibition_event&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/yale_peabody_museum&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/death_of_cyrus&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E69_Death&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/getty_aat_300404386&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E55_Type&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/video_recording_2600&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P129_is_about&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/human_rights&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Human Rights&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/tehran_exhibition_event&gt;</td>
+                                <td>&lt;http://www.w3.org/2000/01/rdf-schema#label&gt;</td>
+                                <td><span class='literal-value'>&quot;Tehran Exhibition Event&quot;</span></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/ted_talk_2011&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q22999115&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/baked_clay&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q42302&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/u_thant&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P107i_is_current_or_former_member_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_nations&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/met_museum&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q160236&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/tehran&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E53_Place&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/tehran_exhibition_event&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/discovery_of_cylinder&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/year_1879&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/cyrus_cylinder_artifact&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q405008&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/washington_dc&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P89_falls_within&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/united_states&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/conquest_of_babylon&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E7_Activity&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/celebration_2500&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at&gt;</td>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/pasargadae&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/yale_exhibition_event&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E7_Activity&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/external/azadi_tower&gt;</td>
+                                <td>&lt;http://www.w3.org/2002/07/owl#sameAs&gt;</td>
+                                <td>&lt;https://www.wikidata.org/wiki/Q1140026&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;http://www.unibo.it/cyrus-kg/data/nabonidus&gt;</td>
+                                <td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</td>
+                                <td>&lt;http://www.cidoc-crm.org/cidoc-crm/E21_Person&gt;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="model-title mt-5">RDF VISUALIZATION</h2>
+        
+        <div class="model-intro">
+            <p>Following the serialization process, the conceptual domain can be visually represented as a structured data model. The RDF Grapher automatically generates this network of entities and properties directly from the Turtle (.ttl) file.</p>
+        </div>
+
+        <figure class="model-figure">
+            <img class="model-image" src="rdf-grapher.png" alt="RDF Visualization of Cyrus Cylinder Knowledge Graph">
+        </figure>
+
+
+    </section>
+
+    
+
+    <section id="lyrics-section" style="display: none; padding: 100px 0; background-color: #1a0101; border-top: 1px solid var(--royal-gold);">
+        <div class="container">
+            <h2 class="section-title text-center mb-5" style="font-family: 'Cinzel', serif;">
+                <a href="https://www.youtube.com/watch?v=AuU8CSfr4rY&list=RDAuU8CSfr4rY&start_radio=1" target="_blank" style="color: var(--royal-gold); text-decoration: none;">Kourosh</a>
+            </h2>            
+            <div style="max-width: 800px; margin: 0 auto;">
+                
+                <div class="lyric-stanza">
+                    <div class="lyric-original">
+                        <span id="line-1c">کردار نیک و ایمان</span> <span id="line-1b"> ،پندار نیک </span> <span id="line-1a"> ،گفتار نیک</span><br>
+                        <span id="line-2">خون کوروش در رگ‌هایم، خون هخامنشاه</span><br>
+                        <span id="line-3">خون کوروش، شاه شاهان، شاهنشاه خاوران</span><br>
+                        <span id="line-4">به فرمانش برمی‌خیزم</span><br>
+                        <span id="line-5">جانم فدای ایران</span>
+                    </div>
+                    <div class="lyric-translation">
+                        <span id="en-1a">Good words,</span> <span id="en-1b">good thoughts,</span> <span id="en-1c">good deeds, and faith,</span><br>
+                        <span id="en-2">The blood of Cyrus flows in my veins, the Achaemenid blood.</span><br>
+                        <span id="en-3">The blood of Cyrus, King of Kings, Emperor of the East,</span><br>
+                        <span id="en-4">At his command, I rise,</span><br>
+                        <span id="en-5">My life devoted to Iran.</span>
+                    </div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-original">
+                        <span id="line-6">بر سر ما سایه او، اهورا مزدای پاک</span><br>
+                        <span id="line-7">دشمنت گر لب بجنبد، می‌نشانیمش به خاک</span><br>
+                        <span id="line-8">من از کوهم، من از آهن، از نژاد آریا</span><br>
+                        <span id="line-9">نسل رستم، نسل کاوه، با درفش کاویان</span>
+                    </div>
+                    <div class="lyric-translation">
+                        <span id="en-6">Above us lies His shadow, the pure Ahura Mazda,</span><br>
+                        <span id="en-7">Should your enemy but move a lip, we shall bring them to the dust.</span><br>
+                        <span id="en-8">I am of the mountain, I am of iron, of the Aryan lineage,</span><br>
+                        <span id="en-9">The seed of Rostam, the seed of Kaveh, bearing the Kaviani Banner.</span>
+                    </div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-original">
+                        <span id="line-10"> دو هزار و پانصد ساله فرهنگت جاویدان باد</span><br>
+                        <span id="line-11">سرنگون باد، واژگون باد</span><br>
+                        <span id="line-12">ظلم و زور و استبداد</span><br>
+                        <span id="line-13">بر خاک تو، در راه تو، خانه‌اش بادا ویران</span><br>
+                        <span id="line-14">دست ایزد همراهت باد</span><br>
+                        <span id="line-15">جاویدان بادا ایران، جاویدان ایران</span>
+                    </div>
+                    <div class="lyric-translation">
+                        <span id="en-10">May your 2500-year-old culture be eternal,</span><br>
+                        <span id="en-11">May they be overthrown, may they be overturned</span><br>
+                        <span id="en-12">Oppression, coercion, and tyranny!</span><br>
+                        <span id="en-13">Upon your soil, in your path, may their house fall to ruin.</span><br>
+                       <span id="en-14"> May the hand of the Divine be with you,</span><br>
+                        <span id="en-15">Eternal be Iran, eternal Iran!</span>
+                    </div>
+                </div>
+                <span style="color: var(--mid-gold); font-size: 0.8rem; letter-spacing: 1px; font-weight: 500;"><em>- Dr. Shahkar Bineshpajooh</em></span>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="author-section">
+        <div class="container">
+            <div class="author-card">
+                <img src="pic.jpg" alt="Sevda" class="author-img">
+                <div class="author-info">
+                    <h3 style="font-size: 1.7rem; line-height: 1.6;">Sevda Rezaei Melal</h3>
+                    <p style="font-size: 0.9rem; line-height: 1.6; opacity: 0.9;">
+                        Combining a legal mindset with Digital Humanities to bring this project to life, proudly driven by my Iranian identity.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-royal text-center">
+        <div class="container">
+            <p class="mb-0">© 2026 The Cyrus Cylinder LOD</p>
+        </div>
+    </footer>
+
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="controls-wrapper" class="royal-controls-wrapper">
+        <button id="music-btn" class="control-btn" onclick="toggleMusic()">
+            <i class="fas fa-music"></i> <span>Music</span>
+        </button>
+        
+        <div class="divider"></div>
+
+        <button id="lyrics-btn-trigger" class="control-btn" onclick="toggleLyrics()">
+            <i class="fas fa-scroll"></i> <span>Lyrics</span>
+        </button>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        
+        function toggleMusic() {
+            var music = document.getElementById("bg-music");
+            var btn = document.getElementById("music-btn");
+            var wrapper = document.getElementById("controls-wrapper");
+
+            if (music.paused) {
+                music.play();
+                btn.innerHTML = '<i class="fas fa-pause"></i> <span>Pause</span>';
+                wrapper.classList.add("active"); 
+            } else {
+                music.pause();
+                btn.innerHTML = '<i class="fas fa-music"></i> <span>Play</span>';
+                wrapper.classList.remove("active"); 
+            }
+        }
+
+        function toggleLyrics() {
+            var section = document.getElementById("lyrics-section");
+            
+            section.style.display = "block";
+            
+            setTimeout(function() {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 50);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedSections = document.querySelectorAll('.about-project-section, .artifact-section, .history-article, .contemporary-montage');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    } 
+                    else {
+                        entry.target.classList.remove('in-view');
+                    }
+                });
+            }, {
+                threshold: 0.15 
+            });
+
+            animatedSections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('magic-dust-container');
+            if (!container) return;
+            
+            const particleCount = 30;
+            for (let i = 0; i < particleCount; i++) {
+                let particle = document.createElement('div');
+                particle.classList.add('dust-particle');
+                let size = Math.random() * 2 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = (Math.random() * 20 + 100) + 'vh'; 
+                particle.style.animationDuration = (Math.random() * 20 + 20) + 's';
+                particle.style.animationDelay = (Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById("bg-music");
+            
+            var lyricsSync = [
+                { idFa: "line-1a", idEn: "en-1a", start: 1.0, end: 7.0 },
+                { idFa: "line-1b", idEn: "en-1b", start: 8.0, end: 15.0 },
+                { idFa: "line-1c", idEn: "en-1c", start: 15.5, end: 23.5 },
+                { idFa: "line-2",  idEn: "en-2",  start: 25.5, end: 36.0 },
+                { idFa: "line-3",  idEn: "en-3",  start: 37.0, end: 47.0 },
+                { idFa: "line-4",  idEn: "en-4",  start: 48.0, end: 52.0 },
+                { idFa: "line-5",  idEn: "en-5",  start: 53.0, end: 58.0 },
+                
+                { idFa: "line-6",  idEn: "en-6",  start: 59.0, end: 70.0 },
+                { idFa: "line-7",  idEn: "en-7",  start: 70.5, end: 81.0 },
+                { idFa: "line-8",  idEn: "en-8",  start: 81.5, end: 91.5 },
+                { idFa: "line-9",  idEn: "en-9",  start: 92.0, end: 102.5 },
+                
+                { idFa: "line-10", idEn: "en-10", start: 103.0, end: 114.0 },
+                { idFa: "line-11", idEn: "en-11", start: 114.5, end: 119.5 },
+                { idFa: "line-12", idEn: "en-12", start: 120.0, end: 125.5 },
+                { idFa: "line-13", idEn: "en-13", start: 125.7, end: 136.0 },
+                { idFa: "line-14", idEn: "en-14", start: 136.5, end: 142.0 },
+                { idFa: "line-15", idEn: "en-15", start: 142.5, end: 153.0 }
+            ];
+
+            audio.addEventListener("timeupdate", function() {
+                var currentTime = audio.currentTime;
+                
+                lyricsSync.forEach(function(line) {
+                    var elFa = document.getElementById(line.idFa);
+                    var elEn = document.getElementById(line.idEn);
+                    
+                    if (currentTime >= line.start && currentTime <= line.end) {
+                        if (elFa) elFa.classList.add("highlight-glow");
+                        if (elEn) elEn.classList.add("highlight-glow-translation");
+                    } else {
+                        if (elFa) elFa.classList.remove("highlight-glow");
+                        if (elEn) elEn.classList.remove("highlight-glow-translation");
+                    }
+                });
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const ttlFileName = 'knowledge_graph.ttl'; 
+
+            fetch(ttlFileName)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("File not found");
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    const safeText = data.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    
+                    document.getElementById('turtleCodeBlock').innerHTML = safeText;
+                })
+                .catch(error => {
+                    document.getElementById('turtleCodeBlock').innerHTML = "Error loading " + ttlFileName + ". Please run via Live Server.";
+                    console.error('Error:', error);
+                });
+        });
+
+    </script>
+
+</body>
+</html>

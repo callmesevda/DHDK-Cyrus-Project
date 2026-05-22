@@ -1,0 +1,351 @@
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix data: <http://www.unibo.it/cyrus-kg/data/> .
+@prefix ext: <http://www.unibo.it/cyrus-kg/external/> .
+@prefix frbroo: <http://iflastandards.info/ns/fr/frbr/frbroo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+data:bible a frbroo:F2_Expression ;
+    crm:P106_is_composed_of data:book_of_ezra ;
+    crm:P1_is_identified_by <http://viaf.org/viaf/174429434> ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q1845> .
+
+data:cambyses a crm:E21_Person ;
+    crm:P152_has_parent data:cyrus_great ;
+    crm:P1_is_identified_by <http://viaf.org/viaf/54149294488180522886> ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q182483> .
+
+data:celebration_2500 a crm:E7_Activity ;
+    crm:P12_occurred_in_the_presence_of data:cyrus_cylinder_artifact,
+        ext:azadi_tower ;
+    crm:P14_carried_out_by data:mohammad_pahlavi ;
+    crm:P4_has_time-span ext:year_1971 ;
+    crm:P7_took_place_at data:pasargadae ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q217824> .
+
+data:irving_finkel a crm:E21_Person ;
+    schema1:knowsAbout data:cuneiform,
+        data:epigraphy ;
+    schema1:knowsLanguage data:akkadian_language ;
+    crm:P107i_is_current_or_former_member_of data:british_museum ;
+    crm:P1_is_identified_by <https://viaf.org/en/viaf/92992175> ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q14655584> .
+
+data:san_francisco a crm:E53_Place ;
+    crm:P89_falls_within data:united_states ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q62> .
+
+data:u_thant a crm:E21_Person ;
+    crm:P107i_is_current_or_former_member_of data:united_nations ;
+    crm:P1_is_identified_by <http://viaf.org/viaf/25398205> ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q1264> .
+
+data:unesco a crm:E74_Group ;
+    schema1:parentOrganization data:united_nations ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q7809> .
+
+data:washington_dc a crm:E53_Place ;
+    crm:P89_falls_within data:united_states ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q61> .
+
+ext:babylonian_exile_event a crm:E7_Activity ;
+    crm:P11_had_participant data:jewish_people ;
+    crm:P14_carried_out_by data:nebuchadnezzar ;
+    crm:P4_has_time-span ext:period_597_538_bc ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q175447> .
+
+ext:burial_of_cyrus a crm:E5_Event ;
+    crm:P12_occurred_in_the_presence_of data:cyrus_great ;
+    crm:P7_took_place_at data:pasargadae .
+
+ext:conquest_of_babylon a crm:E7_Activity ;
+    crm:P11_had_participant data:nabonidus ;
+    crm:P14_carried_out_by data:cyrus_great ;
+    crm:P4_has_time-span ext:year_539_bc ;
+    crm:P7_took_place_at data:babylon ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q28169617> .
+
+ext:death_of_cyrus a crm:E69_Death ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q5962880> .
+
+ext:discovery_of_cylinder a crm:E7_Activity ;
+    crm:P12_occurred_in_the_presence_of data:cyrus_cylinder_artifact ;
+    crm:P14_carried_out_by data:hormuzd_rassam ;
+    crm:P2_has_type ext:getty_aat_300404386 ;
+    crm:P4_has_time-span ext:year_1879 ;
+    crm:P7_took_place_at data:esagila .
+
+ext:liberation_of_jews a crm:E7_Activity ;
+    crm:P11_had_participant data:jewish_people ;
+    crm:P14_carried_out_by data:cyrus_great ;
+    crm:P4_has_time-span ext:year_538_bc ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q2891592> .
+
+ext:presentation_to_un a crm:E7_Activity ;
+    crm:P11_had_participant data:united_nations ;
+    crm:P14_carried_out_by data:ashraf_pahlavi ;
+    crm:P16_used_specific_object ext:un_copy_artifact ;
+    crm:P17_was_motivated_by data:universal_rights .
+
+ext:production_of_cylinder a crm:E12_Production ;
+    crm:P108_has_produced data:cyrus_cylinder_artifact ;
+    crm:P10_falls_within data:achaemenid_period ;
+    crm:P14_carried_out_by data:cyrus_great .
+
+ext:ted_talk_2011 a crm:E7_Activity ;
+    crm:P14_carried_out_by ext:neil_macgregor ;
+    crm:P4_has_time-span ext:year_2011 ;
+    crm:P94_has_created ext:video_recording_2600 ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q22999115> .
+
+ext:tehran_exhibition_event a crm:E7_Activity ;
+    crm:P12_occurred_in_the_presence_of data:cyrus_cylinder_artifact ;
+    crm:P14_carried_out_by data:national_museum_iran ;
+    crm:P7_took_place_at data:tehran .
+
+ext:us_exhibition_tour a crm:E7_Activity ;
+    crm:P12_occurred_in_the_presence_of data:cyrus_cylinder_artifact ;
+    crm:P4_has_time-span ext:year_2013 ;
+    crm:P9_consists_of ext:getty_exhibition_event,
+        ext:met_exhibition_event,
+        ext:yale_exhibition_event .
+
+<http://viaf.org/viaf/10640869> a crm:E42_Identifier .
+
+<http://viaf.org/viaf/174429434> a crm:E42_Identifier .
+
+<http://viaf.org/viaf/25398205> a crm:E42_Identifier .
+
+<http://viaf.org/viaf/311113679> a crm:E42_Identifier .
+
+<http://viaf.org/viaf/54149294488180522886> a crm:E42_Identifier .
+
+<http://viaf.org/viaf/57045736> a crm:E42_Identifier .
+
+data:achaemenid_empire a crm:E74_Group ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q389688> .
+
+data:achaemenid_geography a crm:E53_Place ;
+    skos:exactMatch <https://pleiades.stoa.org/places/753898782> .
+
+data:achaemenid_period a crm:E5_Event ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q114867307> .
+
+data:aramaic_language a crm:E56_Language ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q28602> .
+
+data:ashraf_pahlavi a crm:E21_Person ;
+    schema1:sibling data:mohammad_pahlavi ;
+    crm:P107i_is_current_or_former_member_of data:pahlavi_dynasty ;
+    crm:P1_is_identified_by <http://viaf.org/viaf/57045736> ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q2419984> .
+
+data:babylonia a crm:E53_Place ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q47690> .
+
+data:babylonian_people a crm:E74_Group ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q797930> .
+
+data:baked_clay a crm:E57_Material ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q42302> .
+
+data:book_of_ezra a frbroo:F2_Expression ;
+    crm:P1_is_identified_by <https://viaf.org/en/viaf/315943963> ;
+    crm:P67_refers_to data:babylon,
+        data:cyrus_great,
+        data:jewish_people ;
+    crm:P72_has_language data:aramaic_language,
+        data:hebrew_language ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q131635> .
+
+data:epigraphy a skos:Concept ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q181260> .
+
+data:esagila a crm:E53_Place ;
+    crm:P89_falls_within data:babylon ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q928707> .
+
+data:getty_museum a crm:E74_Group ;
+    crm:P74_has_current_or_former_residence data:los_angeles ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q731126> .
+
+data:hebrew_language a crm:E56_Language ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q9288> .
+
+data:hormuzd_rassam a crm:E21_Person ;
+    crm:P107i_is_current_or_former_member_of data:british_museum ;
+    crm:P1_is_identified_by <https://viaf.org/en/viaf/32378701> ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q1285498> .
+
+data:iran a crm:E53_Place ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q794> .
+
+data:iraq a crm:E53_Place ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q796> .
+
+data:london_city a crm:E53_Place ;
+    crm:P89_falls_within ext:united_kingdom ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q84> .
+
+data:los_angeles a crm:E53_Place ;
+    crm:P89_falls_within data:united_states ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q65> .
+
+data:marduk a frbroo:F38_Character ;
+    crm:P1_is_identified_by <http://viaf.org/viaf/10640869> ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q190123> .
+
+data:met_museum a crm:E74_Group ;
+    crm:P74_has_current_or_former_residence data:new_york ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q160236> .
+
+data:nabonidus a crm:E21_Person ;
+    crm:P107i_is_current_or_former_member_of data:babylonian_people ;
+    crm:P1_is_identified_by <https://viaf.org/en/viaf/148503682> ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q239414> .
+
+data:national_museum_iran a crm:E74_Group ;
+    crm:P74_has_current_or_former_residence data:tehran ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q1631008> .
+
+data:nebuchadnezzar a crm:E21_Person ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q12591> .
+
+data:universal_rights a frbroo:F2_Expression ;
+    crm:P129_is_about data:freedom_religion,
+        data:human_rights ;
+    crm:P130_shows_features_of data:cyrus_cylinder_artifact ;
+    crm:P1_is_identified_by <https://viaf.org/en/viaf/183452328> ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q7813> .
+
+data:yale_peabody_museum a crm:E74_Group ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q122945> .
+
+ext:azadi_tower a crm:E25_Man-Made_Feature ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q1140026> .
+
+ext:cyrus_cylinder_text a frbroo:F2_Expression ;
+    crm:P2_has_type data:cuneiform ;
+    crm:P67_refers_to data:freedom_religion,
+        data:human_rights,
+        data:marduk ;
+    crm:P72_has_language data:akkadian_language .
+
+ext:getty_aat_300404386 a crm:E55_Type ;
+    owl:sameAs <http://vocab.getty.edu/page/aat/300404386> .
+
+ext:getty_exhibition_event a crm:E7_Activity ;
+    crm:P14_carried_out_by data:getty_museum .
+
+ext:met_exhibition_event a crm:E7_Activity ;
+    crm:P14_carried_out_by data:met_museum .
+
+ext:neil_macgregor a crm:E21_Person ;
+    crm:P107i_is_current_or_former_member_of data:british_museum ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q1226759> .
+
+ext:period_597_538_bc a crm:E52_Time-Span .
+
+ext:un_copy_artifact a frbroo:F4_Manifestation_Singleton ;
+    crm:P130_shows_features_of data:cyrus_cylinder_artifact .
+
+ext:united_kingdom a crm:E53_Place ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q145> .
+
+ext:video_recording_2600 a frbroo:F2_Expression ;
+    crm:P129_is_about data:cyrus_cylinder_artifact ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q22999276> .
+
+ext:yale_exhibition_event a crm:E7_Activity ;
+    crm:P14_carried_out_by data:yale_peabody_museum .
+
+ext:year_1879 a crm:E52_Time-Span .
+
+ext:year_1971 a crm:E52_Time-Span .
+
+ext:year_2011 a crm:E52_Time-Span .
+
+ext:year_2013 a crm:E52_Time-Span .
+
+ext:year_538_bc a crm:E52_Time-Span .
+
+ext:year_539_bc a crm:E52_Time-Span .
+
+<https://viaf.org/en/viaf/148503682> a crm:E42_Identifier .
+
+<https://viaf.org/en/viaf/183452328> a crm:E42_Identifier .
+
+<https://viaf.org/en/viaf/315943963> a crm:E42_Identifier .
+
+<https://viaf.org/en/viaf/32378701> a crm:E42_Identifier .
+
+<https://viaf.org/en/viaf/64009470> a crm:E42_Identifier .
+
+<https://viaf.org/en/viaf/92992175> a crm:E42_Identifier .
+
+data:akkadian_language a crm:E56_Language ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q35518> .
+
+data:cuneiform a skos:Concept ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q401> .
+
+data:freedom_religion a skos:Concept ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q171899> .
+
+data:human_rights a skos:Concept ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q8458> .
+
+data:mohammad_pahlavi a crm:E21_Person ;
+    crm:P107i_is_current_or_former_member_of data:pahlavi_dynasty ;
+    crm:P1_is_identified_by <https://viaf.org/en/viaf/64009470> ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q128245> .
+
+data:new_york a crm:E53_Place ;
+    crm:P89_falls_within data:united_states ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q60> .
+
+data:pahlavi_dynasty a crm:E74_Group ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q207991> .
+
+data:pasargadae a crm:E53_Place ;
+    crm:P89_falls_within data:achaemenid_geography ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q230025> ;
+    skos:exactMatch <https://pleiades.stoa.org/places/922693> .
+
+data:tehran a crm:E53_Place ;
+    crm:P89_falls_within data:iran ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q3616> .
+
+data:babylon a crm:E53_Place ;
+    crm:P89_falls_within data:babylonia,
+        data:iraq ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q5684> ;
+    skos:exactMatch <https://pleiades.stoa.org/places/893951> .
+
+data:jewish_people a crm:E74_Group ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q7325> .
+
+data:united_nations a crm:E74_Group ;
+    crm:P74_has_current_or_former_residence data:new_york ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q1065> .
+
+data:british_museum a crm:E74_Group ;
+    crm:P74_has_current_or_former_residence data:london_city ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q6373> .
+
+data:united_states a crm:E53_Place ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q30> .
+
+data:cyrus_great a crm:E21_Person ;
+    crm:P107i_is_current_or_former_member_of data:achaemenid_empire ;
+    crm:P1_is_identified_by <http://viaf.org/viaf/311113679> ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q8423> .
+
+data:cyrus_cylinder_artifact a crm:E22_Human-Made_Object ;
+    crm:P128_carries ext:cyrus_cylinder_text ;
+    crm:P45_consists_of data:baked_clay ;
+    crm:P50_has_current_keeper data:british_museum ;
+    owl:sameAs <https://www.wikidata.org/wiki/Q405008> .
+

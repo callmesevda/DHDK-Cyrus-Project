@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-stylesheet type="text/xsl" href="style.xsl"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:crm="http://www.cidoc-crm.org/cidoc-crm/"
+    xmlns:schema="http://schema.org/"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:frbroo="http://iflastandards.info/ns/fr/frbr/frbroo/">
+
+    <teiHeader>
+
+        <fileDesc>
+
+            <titleStmt>
+                <title>The Cyrus Cylinder: A TEI-Encoded Digital Edition</title>
+                <author>Wikipedia Contributors</author>
+                <editor xml:id="SRM">Sevda Rezaei Melal</editor>
+                <respStmt>
+                    <resp>Semantic markup, data extraction, and TEI encoding by</resp>
+                    <persName ref="#SRM">Sevda Rezaei Melal</persName>
+                </respStmt>
+            </titleStmt>
+            
+            <publicationStmt>
+
+                <publisher>University of Bologna</publisher>
+                <pubPlace>Bologna, Italy</pubPlace>
+                <date when="2026">2026</date>
+                <availability>
+                    <licence target="https://creativecommons.org/licenses/by-sa/4.0/">Prepared for academic evaluation. Base text distributed under a Creative Commons Attribution-ShareAlike 4.0 International License.</licence>
+                </availability>
+
+            </publicationStmt>
+            
+            <sourceDesc>
+
+                <bibl>
+                    <title>Cyrus Cylinder</title>
+                    <publisher>Wikimedia Foundation</publisher>
+                    <ptr target="https://en.wikipedia.org/wiki/Cyrus_Cylinder"/>
+                </bibl>
+                
+            </sourceDesc>
+        </fileDesc>
+
+        <encodingDesc>
+            <projectDesc>
+                <p>This project aims to transform a secondary historical and encyclopedic text concerning the Cyrus Cylinder into a Linked Open Data (LOD) ecosystem by identifying and tagging key entities (persons, places, organizations, concepts, and materials).</p>
+            </projectDesc>
+
+            <listPrefixDef>
+                <prefixDef ident="ext" matchPattern="(.+)" replacementPattern="external_entities.csv#$1">
+                    <p>Mappping prefix 'ext' to the external CSV file containing implicit entities.</p>
+                </prefixDef>
+            </listPrefixDef>
+            
+            <editorialDecl>
+                <p>Historical entities are semantically encoded and linked to Wikidata URIs in a structured Knowledge Graph within the back matter. A critical distinction has been made between geopolitical territories (placeName) and state organizations (orgName).</p>
+                <p>While the primary document is encoded using standard TEI for knowledge graph extraction, the transcription of the ancient artifact borrows encoding principles from the EpiDoc guidelines to represent physical text loss (using gap and supplied elements).</p>
+            </editorialDecl>
+        </encodingDesc>
+    </teiHeader>
+
+    <text>
+        <body>
+            <div type="section" xml:id="intro">
+                <head rend="bold">Cyrus Cylinder</head>
+                <p>
+                    The <objectName ref="#cyrus_cylinder_artifact" rend="bold">Cyrus Cylinder</objectName> is an ancient <material ref="#baked_clay">clay</material> cylinder, now broken into several pieces, 
+                    on which is written an <name type="period" ref="#achaemenid_period">Achaemenid</name> royal inscription in <term ref="#akkadian_language">Akkadian</term> <term ref="#cuneiform">cuneiform</term> script in the name of the Persian king <persName ref="#cyrus_great">Cyrus the Great</persName>. 
+                    It dates from the 6th century BC and was discovered in the ruins of the ancient Mesopotamian city of <placeName ref="#babylon">Babylon</placeName> (now in modern <placeName ref="#iraq">Iraq</placeName>) in <date when="1879">1879</date>.
+                    It is currently in the possession of the <orgName ref="#british_museum">British Museum</orgName>. It was created and used as a foundation deposit following the Persian conquest of Babylon in <date when="-0538">539 BC</date>, when the Neo-Babylonian Empire was invaded by Cyrus and incorporated into his <orgName ref="#achaemenid_empire">Persian Empire</orgName>.
+                </p>
+                <p>
+                    The text on the <objectName ref="#cyrus_cylinder_artifact">Cylinder</objectName> praises <persName ref="#cyrus_great">Cyrus</persName>, sets out his genealogy and portrays him as a king from a line of kings. The Babylonian king <persName ref="#nabonidus">Nabonidus</persName>, who was defeated and deposed by Cyrus, 
+                    is denounced as an impious oppressor of the people of <placeName ref="#babylonia">Babylonia</placeName> and his low-born origins are implicitly contrasted to Cyrus' kingly heritage. 
+                    The victorious Cyrus is portrayed as having been chosen by the chief Babylonian god <persName ref="#marduk">Marduk</persName> to restore peace and order to the <name type="ethnic" ref="#babylonian_people">Babylonians</name>. 
+                    The text states that Cyrus was welcomed by the people of <placeName ref="#babylon">Babylon</placeName> as their new ruler and entered the city in peace. It appeals to Marduk to protect and help Cyrus and his son <persName ref="#cambyses">Cambyses</persName>. 
+                    It extols Cyrus as a benefactor of the citizens of Babylonia who improved their lives, repatriated displaced people and restored temples and cult sanctuaries across Mesopotamia and elsewhere in the region. 
+                    It concludes with a description of how Cyrus repaired the city wall of Babylon and found a similar inscription placed there by an earlier king.
+                </p>
+                <p>
+                    In modern times, the <objectName ref="#cyrus_cylinder_artifact">Cylinder</objectName> was adopted as a national symbol of <placeName ref="#iran">Iran</placeName> by the ruling <orgName ref="#pahlavi_dynasty">Pahlavi dynasty</orgName>, which put it on display in <placeName ref="#tehran">Tehran</placeName> in <date when="1971">1971</date> to commemorate the <name type="event" ref="#celebration_2500">2,500-year celebration</name> of the <orgName ref="#achaemenid_empire">Persian Empire</orgName>. 
+                    Princess <persName ref="#ashraf_pahlavi">Ashraf Pahlavi</persName> presented <orgName ref="#united_nations">United Nations</orgName> Secretary General <persName ref="#u_thant">U Thant</persName> with a replica of the Cylinder. The princess asserted that "the heritage of <persName ref="#cyrus_great">Cyrus</persName> was the heritage of human understanding, tolerance, courage, compassion and, above all, human liberty".
+                    Her brother, <persName ref="#mohammad_pahlavi">Shah Mohammad Reza Pahlavi</persName>, promoted the Cylinder as the "first charter of <term ref="#human_rights">human rights</term>", though this interpretation has been described by various historians as "rather anachronistic" and controversial.
+                </p>
+            </div>
+
+            <div type="section" xml:id="discovery">
+                <head rend="bold">Discovery</head>
+                <p>
+                    The Assyro-British archaeologist <persName ref="#hormuzd_rassam">Hormuzd Rassam</persName> discovered the <objectName ref="#cyrus_cylinder_artifact">Cyrus Cylinder</objectName> in <date when="1879-03">March 1879</date> during a lengthy programme of excavations in Mesopotamia carried out for the <orgName ref="#british_museum">British Museum</orgName>.
+                    It had been placed as a foundation deposit in the foundations of the <placeName ref="#esagila">Ésagila</placeName>, the city's main temple. 
+                    Rassam's expedition followed on from an earlier dig carried out in <date when="1850">1850</date> by the British archaeologist Austen Henry Layard, who excavated three mounds in the same area but found little of importance. 
+                    In <date when="1877">1877</date>, Layard became Britain's ambassador to the Ottoman Empire, which ruled Mesopotamia at the time. He helped Rassam, who had been his assistant in the <date when="1850">1850</date> dig, to obtain a <hi rend="italic">firman</hi> (decree) from the Ottoman Sultan Abdul Hamid II to continue the earlier excavations. 
+                    The <hi rend="italic">firman</hi> was only valid for a year but a second <hi rend="italic">firman</hi>, with much more liberal terms, was issued in <date when="1878">1878</date>. It was granted for two years (through to <date when="1880-10-15">15 October 1880</date>) with the promise of an extension to <date when="1882">1882</date> if required. 
+                    The Sultan's decree authorised Rassam to <quote>pack and dispatch to England any antiquities [he] found ... provided, however, there were no duplicates</quote>. 
+                    A representative of the Sultan was instructed to be present at the dig to examine the objects as they were uncovered.
+                </p>
+                
+                <p>
+                    He soon uncovered a number of important buildings including the <placeName ref="#esagila">Ésagila temple</placeName>, a major shrine to the chief Babylonian god <persName ref="#marduk">Marduk</persName>, although its identity was not fully confirmed until the German archaeologist Robert Koldewey's excavation of <date when="1900">1900</date>. 
+                    The excavators found a large number of business documents written on clay tablets buried in the temple's foundations where they discovered the <objectName ref="#cyrus_cylinder_artifact">Cyrus Cylinder</objectName>. <persName ref="#hormuzd_rassam">Rassam</persName> gave conflicting accounts of where his discoveries were made. 
+                    He wrote in his memoirs, <title level="m" rend="italic">Asshur and the land of Nimrod</title>, that the Cylinder had been found in a mound at the southern end of <placeName ref="#babylon">Babylon</placeName> near the village of Jumjuma or Jimjima. 
+                    However, in a letter sent on <date when="1879-11-20">20 November 1879</date> to Samuel Birch, the Keeper of Oriental Antiquities at the <orgName ref="#british_museum">British Museum</orgName>, he wrote, <quote>The Cylinder of <persName ref="#cyrus_great">Cyrus</persName> was found at Omran [Tell Amran-ibn-Ali] with about six hundred pieces of inscribed terracottas before I left Baghdad.</quote>
+                    He left Baghdad on <date when="1879-04-02">2 April</date>, returning to Mosul and departing from there on <date when="1879-05-02">2 May</date> for a journey to <placeName ref="#london_city">London</placeName> which lasted until <date when="1879-06-19">19 June</date>.
+                </p>
+            </div>
+
+            <div type="section" xml:id="description">
+                <head rend="bold">Description</head>
+                <p>
+                    The <objectName ref="#cyrus_cylinder_artifact">Cyrus Cylinder</objectName> is a barrel-shaped cylinder of <material ref="#baked_clay">baked clay</material> measuring <measure unit="cm" quantity="22.5">22.5 centimetres</measure> (<measure unit="in" quantity="8.9">8.9 in</measure>) by <measure unit="cm" quantity="10">10 centimetres</measure> (<measure unit="in" quantity="3.9">3.9 in</measure>) at its maximum diameter. 
+                    It was created in several stages around a cone-shaped core of clay within which there are large grey stone inclusions. 
+                    It was built up with extra layers of clay to give it a cylindrical shape before a fine surface slip of clay was added to the outer layer, on which the text is inscribed. 
+                    It was excavated in several fragments, having apparently broken apart in antiquity. Today it exists in two main fragments, known as "A" and "B", which were reunited in <date when="1972">1972</date>.
+                </p>
+                <p>
+                    Although the <objectName ref="#cyrus_cylinder_artifact">Cylinder</objectName> clearly post-dates <persName ref="#cyrus_great">Cyrus</persName> the Great's conquest of <placeName ref="#babylon">Babylon</placeName> in <date when="-0539">539 BC</date>, the date of its creation is unclear. 
+                    It is commonly said to date to the early part of Cyrus's reign over Babylon, some time after <date when="-0539">539 BC</date>. The <orgName ref="#british_museum">British Museum</orgName> puts the Cylinder's date of origin at between <date when="-0539">539</date> and <date when="-0530">530 BC</date>.
+                </p>
+            </div>
+
+            <div type="section" xml:id="text_structure">
+                <head rend="bold">Text</head>
+                <p>
+                    The surviving inscription on the <objectName ref="#cyrus_cylinder_artifact">Cyrus Cylinder</objectName> consists of <num value="45">45 lines</num> of text written in <term ref="#akkadian_language">Akkadian</term> <term ref="#cuneiform">cuneiform script</term>. 
+                    The first <num value="35">35 lines</num> are on fragment "A" and the remainder are on fragment "B". 
+                    A number of lines at the start and end of the text are too badly damaged for more than a few words to be legible.
+                </p>
+                <p>
+                    The text is written in an extremely formulaic style that can be divided into six distinct parts:
+                </p>
+                <list type="bulleted">
+                    <item n="1-19">Lines 1–19: an introduction reviling <persName ref="#nabonidus">Nabonidus</persName>, the previous king of <placeName ref="#babylon">Babylon</placeName>, and associating <persName ref="#cyrus_great">Cyrus</persName> with the god <persName ref="#marduk">Marduk</persName>;</item>
+                    <item n="20-22">Lines 20–22: detailing <persName ref="#cyrus_great">Cyrus</persName>'s royal titles and genealogy, and his peaceful entry to <placeName ref="#babylon">Babylon</placeName>;</item>
+                    <item n="22-34">Lines 22–34: a commendation of <persName ref="#cyrus_great">Cyrus</persName>'s policy of restoring <placeName ref="#babylon">Babylon</placeName>;</item>
+                    <item n="34-35">Lines 34–35: a prayer to <persName ref="#marduk">Marduk</persName> on behalf of <persName ref="#cyrus_great">Cyrus</persName> and his son <persName ref="#cambyses">Cambyses</persName>;</item>
+                    <item n="36-37">Lines 36–37: a declaration that <persName ref="#cyrus_great">Cyrus</persName> has enabled the people to live in peace and has increased the offerings made to the gods;</item>
+                    <item n="38-45">Lines 38–45: details of the building activities ordered by <persName ref="#cyrus_great">Cyrus</persName> in <placeName ref="#babylon">Babylon</placeName>.</item>
+                </list>
+            </div>
+
+            <div type="section" xml:id="biblical_interpretations">
+                <head rend="bold">Interpretations</head>
+                <p>
+                    The <bibl ref="#bible">Bible</bibl> records that some <name type="ethnic" ref="#jewish_people">Jews</name> (who were exiled by the <name type="ethnic" ref="#babylonian_people">Babylonians</name>), returned to their homeland from <placeName ref="#babylon">Babylon</placeName>, where they had been settled by Nebuchadnezzar, to rebuild the temple following an edict from <persName ref="#cyrus_great">Cyrus</persName>. 
+                    The <bibl ref="#book_of_ezra">Book of Ezra</bibl> (1–4:5) provides a narrative account of the rebuilding project. 
+                    Scholars have linked one particular passage from the <objectName ref="#cyrus_cylinder_artifact">Cylinder</objectName> to the Old Testament account:
+                </p>
+                <quote xml:id="edict_of_restoration">
+                    From <gap reason="illegible" extent="unknown"/> to Aššur and <supplied reason="context">from</supplied> Susa, Agade, Ešnunna, Zabban, Me-Turnu, Der, as far as the region of Gutium, the sacred centers on the other side of the Tigris, 
+                    whose sanctuaries had been abandoned for a long time, I returned the images of the gods, who had resided there <supplied reason="explanation">i.e., in <placeName ref="#babylon">Babylon</placeName></supplied>, to their places and I let them dwell in eternal abodes. 
+                    I gathered all their inhabitants and returned to them their dwellings.
+                </quote>
+                <p>
+                    This passage has often been interpreted as a reference to the benign policy instituted by <persName ref="#cyrus_great">Cyrus</persName> of allowing exiled peoples, such as the <name type="ethnic" ref="#jewish_people">Jews</name>, to return to their original homelands. 
+                    The <objectName ref="#cyrus_cylinder_artifact">Cylinder</objectName>'s inscription has been linked with the reproduction in the <bibl ref="#book_of_ezra">Book of Ezra</bibl> of two texts that are claimed to be edicts issued by Cyrus concerning the repatriation of the Jews and the reconstruction of the Temple in Jerusalem. 
+                    The two edicts (one in <term ref="#hebrew_language">Hebrew</term> and one in <term ref="#aramaic_language">Aramaic</term>) are substantially different in content and tone, leading some historians to argue that one or both may be a post hoc fabrication. 
+                    The question of their authenticity remains unresolved, though it is widely believed that they do reflect some sort of Persian royal policy, albeit perhaps not one that was couched in the terms given in the text of the biblical edicts.
+                </p>
+            </div>
+
+            <div type="section" xml:id="modern_reception">
+                <head rend="bold"><term ref="#human_rights">Human Rights</term></head>
+                <p>
+                    The <objectName ref="#cyrus_cylinder_artifact">Cylinder</objectName> gained new prominence in the late <date notBefore="1960" notAfter="1969">1960s</date> when the last Shah of <placeName ref="#iran">Iran</placeName> called it "the world's first charter of <term ref="#human_rights">human rights</term>". 
+                    The cylinder was a key symbol of the Shah's political ideology and is still regarded by some commentators as a charter of human rights, but this has been disputed by specialist scholars on the Persian empire.
+                </p>
+
+                <p>
+                    The <objectName ref="#cyrus_cylinder_artifact">Cyrus Cylinder</objectName> was dubbed the "first declaration of <term ref="#human_rights">human rights</term>" by the pre-Revolution Iranian government, a reading prominently advanced by <persName ref="#mohammad_pahlavi">Shah Mohammed Reza Pahlavi</persName>, in a <date when="1967">1967</date> book, <title level="m" rend="italic">The White Revolution of <placeName ref="#iran">Iran</placeName></title>. 
+                    The Shah identified <persName ref="#cyrus_great">Cyrus</persName> as a key figure in government ideology and associated his government with the Achaemenids. 
+                    He wrote that "the history of our empire began with the famous declaration of Cyrus, which, for its advocacy of humane principles, justice and liberty, must be considered one of the most remarkable documents in the history of mankind." 
+                    The Shah described Cyrus as the first ruler in history to give his subjects "freedom of opinion and other basic rights". 
+                    In <date when="1968">1968</date>, the Shah opened the first <orgName ref="#united_nations">United Nations</orgName> Conference on Human Rights in <placeName ref="#tehran">Tehran</placeName> by saying that the Cyrus Cylinder was the precursor to the modern <bibl ref="#universal_rights">Universal Declaration of Human Rights</bibl>.
+                </p>
+
+                <p>
+                    In his <date when="1971">1971</date> Nowruz (New Year) speech, the Shah declared that 1350 AP (1971–1972) would be <persName ref="#cyrus_great">Cyrus the Great</persName> Year, during which a grand commemoration would be held to celebrate <name type="event" ref="#celebration_2500">2,500 years of Persian monarchy</name>. 
+                    It would serve as a showcase for a modern <placeName ref="#iran">Iran</placeName> in which the contributions that <placeName ref="#iran">Iran</placeName> had made to world civilization would be recognized. 
+                    The main theme of the commemoration was the centrality of the monarchy within <placeName ref="#iran">Iran</placeName>'s political system, associating the Shah of <placeName ref="#iran">Iran</placeName> with the famous monarchs of Persia's past, and with Cyrus in particular. 
+                    The Shah looked to the <name type="epoch" ref="#achaemenid_period">Achaemenid period</name> as <quote>a moment from the national past that could best serve as a model and a slogan for the imperial society he hoped to create</quote>.
+                </p>
+
+            </div>
+
+            <div type="section" xml:id="exhibition_history">
+                <head rend="bold">Exhibition History</head>
+                <p>
+                    The <objectName ref="#cyrus_cylinder_artifact">Cyrus Cylinder</objectName> has been displayed in the <orgName ref="#british_museum">British Museum</orgName> since its formal acquisition in <date when="1880">1880</date>. 
+                    It has been loaned five times – twice to <placeName ref="#iran">Iran</placeName>, between <date from="1971-10-07" to="1971-10-22">7–22 October 1971</date> in conjunction with the <name type="event" ref="#celebration_2500">2,500 year celebration</name> of the Persian Empire and again from <date from="2010-09" to="2010-12">September–December 2010</date>, once to Spain from <date from="2006-03" to="2006-06">March–June 2006</date>,
+                    once to the <placeName ref="#united_states">United States</placeName> in a traveling exhibition from <date from="2013-03" to="2013-10">March–October 2013</date>, and once to the <orgName ref="#yale_peabody_museum">Yale Peabody Museum</orgName> for their reopening celebrations in <date from="2024-05" to="2024-06">May-June 2024</date>. Many replicas have been made. 
+                    Some were distributed by the Shah following the <date when="1971">1971</date> commemorations, while the British Museum and <orgName ref="#national_museum_iran">National Museum of Iran</orgName> have sold them commercially.
+                </p>
+
+                <p>
+                    On <date when="2012-11-28">November 28, 2012</date>, the BBC announced the first <placeName ref="#united_states">United States</placeName> tour of the <objectName ref="#cyrus_cylinder_artifact">Cylinder</objectName>. 
+                    Under the headline "<orgName ref="#british_museum">British Museum</orgName> lends ancient 'bill of rights' cylinder to US", Museum director Neil MacGregor declared that "The cylinder, often referred to as the first bill of <term ref="#human_rights">human rights</term>, 'must be shared as widely as possible'". 
+                    The British Museum itself announced the news in its press release, saying "'First declaration of human rights' to tour five cities in the United States". 
+                    According to the British Museum's website for the Cylinder's US exhibition "CyrusCylinder2013.com", the tour started in <date when="2013-03">March 2013</date> and included <placeName ref="#washington_dc">Washington D.C.</placeName>'s Smithsonian's Arthur M. Sackler Gallery, 
+                    the Museum of Fine Arts in Houston, the <orgName ref="#met_museum">Metropolitan Museum of Art</orgName> in <placeName ref="#new_york">New York</placeName>, the Asian Art Museum in <placeName ref="#san_francisco">San Francisco</placeName> and culminated at the <orgName ref="#getty_museum">J. Paul Getty Museum</orgName> in <placeName ref="#los_angeles">Los Angeles</placeName>, in <date when="2013-10">October 2013</date>.
+                </p>
+            </div>
+
+        </body>
+
+        <back>
+            <listPerson>
+
+                <person xml:id="cyrus_great" sameAs="https://www.wikidata.org/wiki/Q8423">
+                    <persName>Cyrus the Great</persName>
+                    <idno type="VIAF">http://viaf.org/viaf/311113679</idno>
+                </person>
+
+                <person xml:id="hormuzd_rassam" sameAs="https://www.wikidata.org/wiki/Q1285498">
+                    <persName>Hormuzd Rassam</persName>
+                    <idno type="VIAF">https://viaf.org/en/viaf/32378701</idno>
+                </person>
+
+                <person xml:id="irving_finkel" sameAs="https://www.wikidata.org/wiki/Q14655584">
+                    <persName>Irving Finkel</persName>
+                    <idno type="VIAF">https://viaf.org/en/viaf/92992175</idno>
+                </person>
+                
+                <person xml:id="mohammad_pahlavi" sameAs="https://www.wikidata.org/wiki/Q128245">
+                    <persName>Mohammad Reza Pahlavi</persName>
+                    <idno type="VIAF">https://viaf.org/en/viaf/64009470</idno>
+                </person>
+
+                <person xml:id="nabonidus" sameAs="https://www.wikidata.org/wiki/Q239414">
+                    <persName>Nabonidus</persName>
+                    <idno type="VIAF">https://viaf.org/en/viaf/148503682</idno>
+                </person>
+
+                <person xml:id="marduk" role="deity" sameAs="https://www.wikidata.org/wiki/Q190123">
+                    <persName>Marduk</persName>
+                    <idno type="VIAF">http://viaf.org/viaf/10640869</idno>
+                </person>
+
+                <personGrp xml:id="babylonian_people" sameAs="https://www.wikidata.org/wiki/Q797930">
+                    <name>Babylonians</name>
+                </personGrp>
+
+                <person xml:id="ashraf_pahlavi" sameAs="https://www.wikidata.org/wiki/Q2419984">
+                    <persName>Ashraf Pahlavi</persName>
+                    <idno type="VIAF">http://viaf.org/viaf/57045736</idno>
+                </person>
+
+                <person xml:id="cambyses" sameAs="https://www.wikidata.org/wiki/Q182483">
+                    <persName>Cambyses II</persName>
+                    <idno type="VIAF">http://viaf.org/viaf/54149294488180522886</idno>
+                </person>
+
+                <person xml:id="u_thant" sameAs="https://www.wikidata.org/wiki/Q1264">
+                    <persName>U Thant</persName>
+                    <idno type="VIAF">http://viaf.org/viaf/25398205</idno>
+                </person>
+
+                <person xml:id="nebuchadnezzar" sameAs="https://www.wikidata.org/wiki/Q12591">
+                    <persName>Nebuchadnezzar</persName>
+                </person>
+
+                <personGrp xml:id="jewish_people" sameAs="https://www.wikidata.org/wiki/Q7325">
+                    <name>Jews</name>
+                </personGrp>
+
+            </listPerson>
+
+
+            <listPlace>
+                <place xml:id="babylonia" sameAs="https://www.wikidata.org/wiki/Q47690">
+                    <placeName>Babylonia</placeName>                    
+                </place>
+
+                <place xml:id="babylon" sameAs="https://www.wikidata.org/wiki/Q5684">
+                    <placeName>Babylon</placeName>
+                    <idno type="URI" subtype="pleiades">https://pleiades.stoa.org/places/893951</idno>
+                </place>
+
+                <place xml:id="pasargadae" sameAs="https://www.wikidata.org/wiki/Q230025">
+                    <placeName>Pasargadae</placeName>
+                    <idno type="URI" subtype="pleiades">https://pleiades.stoa.org/places/922693</idno>
+                </place>
+
+                <place xml:id="united_states" sameAs="https://www.wikidata.org/wiki/Q30"> 
+                    <placeName>United States</placeName>
+                </place>
+
+                <place xml:id="london_city" sameAs="https://www.wikidata.org/wiki/Q84">
+                    <placeName>London</placeName>
+                </place>
+
+                <place xml:id="washington_dc" sameAs="https://www.wikidata.org/wiki/Q61">
+                    <placeName>Washington D.C.</placeName>
+                </place>
+
+                <place xml:id="san_francisco" sameAs="https://www.wikidata.org/wiki/Q62">
+                    <placeName>San Francisco</placeName>
+                </place>
+
+                <place xml:id="los_angeles" sameAs="https://www.wikidata.org/wiki/Q65">
+                    <placeName>Los Angeles</placeName>
+                </place>
+
+                <place xml:id="new_york" sameAs="https://www.wikidata.org/wiki/Q60">
+                    <placeName>New York City</placeName>
+                </place>
+
+                <place xml:id="achaemenid_geography">
+                    <placeName>Achaemenid Empire</placeName>
+                    <idno type="URI" subtype="pleiades">https://pleiades.stoa.org/places/753898782</idno>
+                </place>
+
+                <place xml:id="iran" sameAs="https://www.wikidata.org/wiki/Q794">
+                    <placeName>Iran</placeName>
+                </place>
+
+                <place xml:id="tehran" sameAs="https://www.wikidata.org/wiki/Q3616">
+                    <placeName>Tehran</placeName>
+                </place>
+
+                <place xml:id="esagila" sameAs="https://www.wikidata.org/wiki/Q928707">
+                    <placeName>Esagila</placeName>
+                </place>
+
+                <place xml:id="iraq" sameAs="https://www.wikidata.org/wiki/Q796">
+                    <placeName>Iraq</placeName>
+                </place>
+
+            </listPlace>
+
+
+            <listOrg>
+                <org xml:id="british_museum" sameAs="https://www.wikidata.org/wiki/Q6373">
+                    <orgName>British Museum</orgName>
+                </org>
+
+                <org xml:id="achaemenid_empire" sameAs="https://www.wikidata.org/wiki/Q389688">
+                    <orgName>Achaemenid Empire</orgName>                    
+                </org>
+
+                <org xml:id="unesco" sameAs="https://www.wikidata.org/wiki/Q7809">
+                    <orgName>UNESCO</orgName>
+                </org>
+
+                <org xml:id="getty_museum" sameAs="https://www.wikidata.org/wiki/Q731126">
+                    <orgName>J. Paul Getty Museum</orgName>
+                </org>
+
+                <org xml:id="met_museum" sameAs="https://www.wikidata.org/wiki/Q160236">
+                    <orgName>Metropolitan Museum of Art</orgName>
+                </org>
+
+                <org xml:id="national_museum_iran" sameAs="https://www.wikidata.org/wiki/Q1631008">
+                    <orgName>National Museum of Iran</orgName>
+                </org>
+
+                <org xml:id="yale_peabody_museum" sameAs="https://www.wikidata.org/wiki/Q122945">
+                    <orgName>Yale Peabody Museum</orgName>
+                </org>
+
+                <org xml:id="pahlavi_dynasty" sameAs="https://www.wikidata.org/wiki/Q207991">
+                    <orgName>Pahlavi Dynasty</orgName>
+                </org>
+
+                <org xml:id="united_nations" sameAs="https://www.wikidata.org/wiki/Q1065">
+                    <orgName>United Nations</orgName>
+                </org>
+
+            </listOrg>
+
+
+            <listBibl>
+
+                <bibl xml:id="book_of_ezra" sameAs="https://www.wikidata.org/wiki/Q131635">
+                    <title>Book of Ezra</title>
+                    <idno type="VIAF">https://viaf.org/en/viaf/315943963</idno>
+                </bibl>
+
+                <bibl xml:id="universal_rights" sameAs="https://www.wikidata.org/wiki/Q7813">
+                    <title>Universal Declaration of Human Rights</title>
+                    <idno type="VIAF">https://viaf.org/en/viaf/183452328</idno>
+                </bibl>
+
+                <bibl xml:id="bible" sameAs="https://www.wikidata.org/wiki/Q1845">
+                    <title>The Bible</title>
+                    <idno type="VIAF">http://viaf.org/viaf/174429434</idno>
+                </bibl>
+
+            </listBibl>
+
+
+            <listObject>
+
+                <object xml:id="cyrus_cylinder_artifact" sameAs="https://www.wikidata.org/wiki/Q405008">
+                    <objectIdentifier>
+                        <objectName>Cyrus Cylinder</objectName>
+                    </objectIdentifier>
+                </object>
+
+            </listObject>
+
+
+            <listEvent>
+
+                <event xml:id="celebration_2500" sameAs="https://www.wikidata.org/wiki/Q217824">
+                    <label>2,500 year celebration of the Persian Empire</label>
+                </event>
+
+                <event xml:id="achaemenid_period" type="epoch" sameAs="https://www.wikidata.org/wiki/Q114867307">
+                    <label>Achaemenid Period</label>
+                </event>
+
+            </listEvent>
+
+            <list type="material">
+
+                <item xml:id="baked_clay" sameAs="https://www.wikidata.org/wiki/Q42302">
+                    <term>Baked Clay</term>
+                </item>
+
+            </list>
+        
+            <list type="concept">
+
+                <item xml:id="akkadian_language" sameAs="https://www.wikidata.org/wiki/Q35518">
+                    <term>Akkadian Language</term>
+                </item>
+
+                <item xml:id="human_rights" sameAs="https://www.wikidata.org/wiki/Q8458">
+                    <term>Human Rights</term>
+                </item>
+
+                <item xml:id="cuneiform" sameAs="https://www.wikidata.org/wiki/Q401">
+                    <term>Cuneiform</term>
+                </item>
+
+                <item xml:id="freedom_religion" sameAs="https://www.wikidata.org/wiki/Q171899">
+                    <term>Freedom of Religion</term>
+                </item>
+
+                <item xml:id="epigraphy" sameAs="https://www.wikidata.org/wiki/Q181260">
+                    <term>Epigraphy</term>
+                </item>
+
+                <item xml:id="hebrew_language" sameAs="https://www.wikidata.org/wiki/Q9288">
+                    <term>Hebrew Language</term>
+                </item>
+
+                <item xml:id="aramaic_language" sameAs="https://www.wikidata.org/wiki/Q28602">
+                    <term>Aramaic Language</term>
+                </item>
+
+            </list>
+
+            <listRelation>
+
+                <relation active="#cyrus_cylinder_artifact" name="crm:P45_consists_of" passive="#baked_clay"/>
+                <relation active="#cyrus_cylinder_artifact" name="crm:P50_has_current_keeper" passive="#british_museum"/>
+                <relation active="#cyrus_cylinder_artifact" name="crm:P128_carries" passive="ext:cyrus_cylinder_text"/>
+                <relation active="ext:cyrus_cylinder_text" name="crm:P72_has_language" passive="#akkadian_language"/>
+                <relation active="ext:cyrus_cylinder_text" name="crm:P2_has_type" passive="#cuneiform"/>
+                <relation active="ext:cyrus_cylinder_text" name="crm:P67_refers_to" passive="#human_rights"/>
+                <relation active="ext:cyrus_cylinder_text" name="crm:P67_refers_to" passive="#freedom_religion"/>
+                <relation active="ext:cyrus_cylinder_text" name="crm:P67_refers_to" passive="#marduk"/>
+                <relation active="ext:conquest_of_babylon" name="crm:P14_carried_out_by" passive="#cyrus_great"/>
+                <relation active="ext:conquest_of_babylon" name="crm:P7_took_place_at" passive="#babylon"/>
+                <relation active="ext:conquest_of_babylon" name="crm:P4_has_time-span" passive="ext:year_539_bc"/>
+                <relation active="ext:conquest_of_babylon" name="crm:P11_had_participant" passive="#nabonidus"/>
+                <relation active="ext:liberation_of_jews" name="crm:P14_carried_out_by" passive="#cyrus_great"/>
+                <relation active="ext:liberation_of_jews" name="crm:P11_had_participant" passive="#jewish_people"/>
+                <relation active="ext:liberation_of_jews" name="crm:P4_has_time-span" passive="ext:year_538_bc"/>
+                <relation active="ext:babylonian_exile_event" name="crm:P14_carried_out_by" passive="#nebuchadnezzar"/>
+                <relation active="ext:babylonian_exile_event" name="crm:P11_had_participant" passive="#jewish_people"/>
+                <relation active="ext:babylonian_exile_event" name="crm:P4_has_time-span" passive="ext:period_597_538_bc"/>
+                <relation active="ext:discovery_of_cylinder" name="crm:P14_carried_out_by" passive="#hormuzd_rassam"/>
+                <relation active="ext:discovery_of_cylinder" name="crm:P12_occurred_in_the_presence_of" passive="#cyrus_cylinder_artifact"/>
+                <relation active="ext:discovery_of_cylinder" name="crm:P7_took_place_at" passive="#esagila"/>
+                <relation active="ext:discovery_of_cylinder" name="crm:P4_has_time-span" passive="ext:year_1879"/>
+                <relation active="#esagila" name="crm:P89_falls_within" passive="#babylon"/>
+                <relation active="ext:us_exhibition_tour" name="crm:P12_occurred_in_the_presence_of" passive="#cyrus_cylinder_artifact"/>
+                <relation active="ext:us_exhibition_tour" name="crm:P4_has_time-span" passive="ext:year_2013"/>
+                <relation active="ext:us_exhibition_tour" name="crm:P9_consists_of" passive="ext:met_exhibition_event"/>
+                <relation active="ext:us_exhibition_tour" name="crm:P9_consists_of" passive="ext:getty_exhibition_event"/>
+                <relation active="ext:us_exhibition_tour" name="crm:P9_consists_of" passive="ext:yale_exhibition_event"/>
+                <relation active="ext:met_exhibition_event" name="crm:P14_carried_out_by" passive="#met_museum"/>
+                <relation active="ext:getty_exhibition_event" name="crm:P14_carried_out_by" passive="#getty_museum"/>
+                <relation active="ext:yale_exhibition_event" name="crm:P14_carried_out_by" passive="#yale_peabody_museum"/>
+                <relation active="#celebration_2500" name="crm:P14_carried_out_by" passive="#mohammad_pahlavi"/>
+                <relation active="#celebration_2500" name="crm:P7_took_place_at" passive="#pasargadae"/>
+                <relation active="#celebration_2500" name="crm:P12_occurred_in_the_presence_of" passive="#cyrus_cylinder_artifact"/>
+                <relation active="#celebration_2500" name="crm:P4_has_time-span" passive="ext:year_1971"/>
+                <relation active="ext:presentation_to_un" name="crm:P14_carried_out_by" passive="#ashraf_pahlavi"/>
+                <relation active="ext:presentation_to_un" name="crm:P16_used_specific_object" passive="ext:un_copy_artifact"/>
+                <relation active="ext:presentation_to_un" name="crm:P11_had_participant" passive="#united_nations"/>
+                <relation active="#mohammad_pahlavi" name="crm:P107i_is_current_or_former_member_of" passive="#pahlavi_dynasty"/>
+                <relation active="#ashraf_pahlavi" name="crm:P107i_is_current_or_former_member_of" passive="#pahlavi_dynasty"/>
+                <relation active="#ashraf_pahlavi" name="schema:sibling" passive="#mohammad_pahlavi"/>
+                <relation active="#universal_rights" name="crm:P129_is_about" passive="#human_rights"/>
+                <relation active="#universal_rights" name="crm:P129_is_about" passive="#freedom_religion"/>
+                <relation active="#bible" name="crm:P106_is_composed_of" passive="#book_of_ezra"/>
+                <relation active="#book_of_ezra" name="crm:P72_has_language" passive="#hebrew_language"/>
+                <relation active="#book_of_ezra" name="crm:P72_has_language" passive="#aramaic_language"/>
+                <relation active="#book_of_ezra" name="crm:P67_refers_to" passive="#cyrus_great"/>
+                <relation active="#book_of_ezra" name="crm:P67_refers_to" passive="#jewish_people"/>
+                <relation active="#book_of_ezra" name="crm:P67_refers_to" passive="#babylon"/>
+                <relation active="#cyrus_great" name="crm:P107i_is_current_or_former_member_of" passive="#achaemenid_empire"/>
+                <relation active="#cambyses" name="crm:P152_has_parent" passive="#cyrus_great"/>
+                <relation active="#hormuzd_rassam" name="crm:P107i_is_current_or_former_member_of" passive="#british_museum"/>
+                <relation active="#irving_finkel" name="crm:P107i_is_current_or_former_member_of" passive="#british_museum"/>
+                <relation active="#u_thant" name="crm:P107i_is_current_or_former_member_of" passive="#united_nations"/>
+                <relation active="#irving_finkel" name="schema:knowsAbout" passive="#cuneiform"/>
+                <relation active="#babylon" name="crm:P89_falls_within" passive="#babylonia"/>
+                <relation active="#pasargadae" name="crm:P89_falls_within" passive="#achaemenid_geography"/>
+                <relation active="#tehran" name="crm:P89_falls_within" passive="#iran"/>
+                <relation active="#new_york" name="crm:P89_falls_within" passive="#united_states"/>
+                <relation active="#los_angeles" name="crm:P89_falls_within" passive="#united_states"/>
+                <relation active="#british_museum" name="crm:P74_has_current_or_former_residence" passive="#london_city"/>
+                <relation active="#united_nations" name="crm:P74_has_current_or_former_residence" passive="#new_york"/>
+                <relation active="#met_museum" name="crm:P74_has_current_or_former_residence" passive="#new_york"/>
+                <relation active="#getty_museum" name="crm:P74_has_current_or_former_residence" passive="#los_angeles"/>
+                <relation active="ext:ted_talk_2011" name="crm:P14_carried_out_by" passive="ext:neil_macgregor"/>
+                <relation active="ext:ted_talk_2011" name="crm:P4_has_time-span" passive="ext:year_2011"/>
+                <relation active="ext:ted_talk_2011" name="crm:P94_has_created" passive="ext:video_recording_2600"/>
+                <relation active="ext:video_recording_2600" name="crm:P129_is_about" passive="#cyrus_cylinder_artifact"/>
+                <relation active="ext:burial_of_cyrus" name="crm:P7_took_place_at" passive="#pasargadae"/>
+                <relation active="ext:burial_of_cyrus" name="crm:P12_occurred_in_the_presence_of" passive="#cyrus_great"/>
+                <relation active="#irving_finkel" name="schema:knowsLanguage" passive="#akkadian_language"/>
+                <relation active="#ashraf_pahlavi" name="schema:sibling" passive="#mohammad_pahlavi"/>
+                <relation active="ext:production_of_cylinder" name="crm:P108_has_produced" passive="#cyrus_cylinder_artifact"/>
+                <relation active="ext:production_of_cylinder" name="crm:P14_carried_out_by" passive="#cyrus_great"/>
+                <relation active="#babylon" name="crm:P89_falls_within" passive="#iraq"/>
+                <relation active="#celebration_2500" name="crm:P12_occurred_in_the_presence_of" passive="ext:azadi_tower"/>
+                <relation active="ext:discovery_of_cylinder" name="crm:P2_has_type" passive="ext:getty_aat_300404386"/>
+                <relation active="#unesco" name="schema:parentOrganization" passive="#united_nations"/>
+                <relation active="ext:production_of_cylinder" name="crm:P10_falls_within" passive="#achaemenid_period"/>
+                <relation active="ext:tehran_exhibition_event" name="crm:P12_occurred_in_the_presence_of" passive="#cyrus_cylinder_artifact"/>
+                <relation active="#national_museum_iran" name="crm:P74_has_current_or_former_residence" passive="#tehran"/>
+                <relation active="ext:tehran_exhibition_event" name="crm:P14_carried_out_by" passive="#national_museum_iran"/>
+                <relation active="ext:tehran_exhibition_event" name="crm:P7_took_place_at" passive="#tehran"/>
+                <relation active="ext:un_copy_artifact" name="crm:P130_shows_features_of" passive="#cyrus_cylinder_artifact"/>
+                <relation active="ext:neil_macgregor" name="crm:P107i_is_current_or_former_member_of" passive="#british_museum"/>
+                <relation active="#london_city" name="crm:P89_falls_within" passive="ext:united_kingdom"/>
+                <relation active="#washington_dc" name="crm:P89_falls_within" passive="#united_states"/>
+                <relation active="#san_francisco" name="crm:P89_falls_within" passive="#united_states"/>
+                <relation active="#irving_finkel" name="schema:knowsAbout" passive="#epigraphy"/>
+                <relation active="#nabonidus" name="crm:P107i_is_current_or_former_member_of" passive="#babylonian_people"/>
+                <relation active="#universal_rights" name="crm:P130_shows_features_of" passive="#cyrus_cylinder_artifact"/>
+                <relation active="ext:presentation_to_un" name="crm:P17_was_motivated_by" passive="#universal_rights"/>
+                <relation active="ext:presentation_to_un" name="crm:P11_had_participant" passive="#united_nations"/>
+
+
+
+            </listRelation>
+        </back>
+    </text>
+
+</TEI>

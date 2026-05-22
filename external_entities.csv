@@ -1,0 +1,29 @@
+Entity_ID,Label,Class,Authority Control Link (owl:sameAs)
+cyrus_cylinder_text,The Abstract Text of Cyrus Cylinder,frbroo:F2_Expression,
+conquest_of_babylon,Fall of Babylon (539 BC),crm:E7_Activity,https://www.wikidata.org/wiki/Q28169617
+liberation_of_jews,Return to Zion / Liberation of Jews,crm:E7_Activity,https://www.wikidata.org/wiki/Q2891592
+discovery_of_cylinder,Excavation and Discovery of the Cylinder,crm:E7_Activity,
+united_kingdom,United Kingdom,crm:E53_Place,https://www.wikidata.org/wiki/Q145
+us_exhibition_tour,The US Exhibition Tour,crm:E7_Activity,
+babylonian_exile_event,Babylonian Exile Event,crm:E7_Activity,https://www.wikidata.org/wiki/Q175447
+neil_macgregor,Neil MacGregor,crm:E21_Person,https://www.wikidata.org/wiki/Q1226759
+video_recording_2600,2600 Years of History in One Object,frbroo:F2_Expression,https://www.wikidata.org/wiki/Q22999276
+ted_talk_2011,TEDGlobal 2011,crm:E7_Activity,https://www.wikidata.org/wiki/Q22999115
+presentation_to_un,Gift of Replica to UN,crm:E7_Activity,
+un_copy_artifact,UN Replica of Cyrus Cylinder,frbroo:F4_Manifestation_Singleton,
+year_539_bc,539 BC,crm:E52_Time-Span,
+year_1879,1879,crm:E52_Time-Span,
+year_1971,1971,crm:E52_Time-Span,
+year_2013,2013,crm:E52_Time-Span,
+period_597_538_bc,597 - 538 BC,crm:E52_Time-Span,
+met_exhibition_event,MET Exhibition Event,crm:E7_Activity,
+getty_exhibition_event,Getty Exhibition Event,crm:E7_Activity,
+yale_exhibition_event,Yale Exhibition Event,crm:E7_Activity,
+year_538_bc,538 BC,crm:E52_Time-Span,
+year_2011,2011,crm:E52_Time-Span,
+azadi_tower,Azadi Tower,crm:E25_Man-Made_Feature,https://www.wikidata.org/wiki/Q1140026
+getty_aat_300404386,Discoveries (Events),crm:E55_Type,http://vocab.getty.edu/page/aat/300404386
+death_of_cyrus,Death of Cyrus,crm:E69_Death,https://www.wikidata.org/wiki/Q5962880
+tehran_exhibition_event,Tehran Exhibition Event,crm:E7_Activity,
+production_of_cylinder,Production of Cylinder,crm:E12_Production,
+burial_of_cyrus,Burial of Cyrus,crm:E5_Event,
