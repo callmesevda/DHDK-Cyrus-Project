@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Cyrus Cylinder | Royal LOD Project</title>
+    <title>The Cyrus Cylinder | LOD Project</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,7 +11,6 @@
     
     <style>
 
-        /* --- Smooth Scrolling --- */
         html {
             scroll-snap-type: y proximity;
             scroll-behavior: smooth;
@@ -62,9 +61,9 @@
 
         /* --- Imperial Hero Section --- */
         .hero-section {
-            position: relative; /* انتقال یافته از پایین */
-            z-index: 10;        /* انتقال یافته از پایین */
-            overflow: hidden;   /* انتقال یافته از پایین - جلوگیری از بیرون زدن نورها */
+            position: relative; 
+            z-index: 10;        
+            overflow: hidden;   
             background-color: var(--bg-dark-crimson);
             background-image: linear-gradient(to bottom, rgba(43, 3, 3, 0.6), rgba(43, 3, 3, 0.85)), url('20101229_Gates_of_the_nations_Persepolis_Iran.jpg');
             background-size: cover;
@@ -73,14 +72,13 @@
             background-attachment: fixed;
             padding: 190px 0; 
             text-align: center;
-            border-bottom: 1px solid var(--royal-gold); /* اصلاح شد: خط حذف شد تا با تاریکی ادغام شود */
+            border-bottom: 1px solid var(--royal-gold); 
             box-shadow: inset 0 -50px 80px rgba(0,0,0,0.9);
         }
 
-        /* --- Hero Title & Link --- */
         .hero-title-link {
-            text-decoration: none; /* حذف خط زیر لینک */
-            display: inline-block; /* برای اینکه انیمیشن روی متن درست کار کند */
+            text-decoration: none; 
+            display: inline-block; 
         }
         
         .hero-title {
@@ -88,36 +86,31 @@
             font-weight: 700; 
             margin-bottom: 20px; 
             letter-spacing: 2px;
-            transition: all 0.3s ease; /* حرکت نرم */
+            transition: all 0.3s ease;
             cursor: pointer;
         }
 
-        /* درخشش شاهانه هنگام رفتن موس روی تیتر */
         .hero-title:hover {
-            transform: scale(1.05); /* کمی بزرگ شدن */
+            transform: scale(1.05); 
             text-shadow: 0 0 20px rgba(184, 134, 11, 0.8), 0 2px 4px rgba(0,0,0,0.5); 
         }
 
-        /* --- Hero Typography --- */
         .hero-section p.lead { 
             font-size: 1.4rem; 
             font-style: italic; 
             color: var(--pale-gold); 
             max-width: 800px; 
-            margin: 0 auto; /* عرض محدود و متمرکزسازی در وسط صفحه */
+            margin: 0 auto; 
             line-height: 1.8; 
         }
-        /* --- Cinematic Spotlights (Punchy & Visible) --- */
+
         .spotlight {
             position: absolute;
             bottom: -20vh;
             width: 20vw;
             height: 150vh;
-            /* نور را غلیظ‌تر کردیم (از 0.4 به 0.6) */
             background: linear-gradient(0deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0) 80%);
             border-radius: 50%;
-            
-            /* تاری را نصف کردیم تا ستونِ نور واضح‌تر دیده شود */
             filter: blur(25px);
             pointer-events: none;
             z-index: 1;
@@ -126,7 +119,6 @@
         .spotlight-left {
             left: -15%;
             transform-origin: bottom center;
-            /* سرعت را به ۴ ثانیه کاهش دادیم و important زدیم تا ویندوز جلویش را نگیرد */
             animation: swayLeft 5s ease-in-out infinite alternate !important;
         }
 
@@ -136,7 +128,6 @@
             animation: swayRight 5s ease-in-out infinite alternate !important; 
         }
 
-        /* دامنه‌ی حرکت را بسیار وسیع‌تر کردیم تا تکان خوردنش واضح باشد */
         @keyframes swayLeft {
             0% { transform: rotate(10deg) scaleY(1); }
             100% { transform: rotate(55deg) scaleY(1.5); }
@@ -147,29 +138,24 @@
             100% { transform: rotate(-60deg) scaleY(1.5); }
         }
 
-        /* --- New Artifact Section --- */
         .artifact-section {
-            position: relative; /* این خط خیلی مهمه تا غبارها بیرون نزنن */
+            position: relative; 
             overflow: hidden;
             background: linear-gradient(to bottom, var(--bg-dark-crimson) 0%, #000000 20%, #000000 80%, var(--bg-dark-crimson) 100%);
             padding: 200px 0; 
             text-align: center;
             border: none; 
-            transition: all 1s ease-out; /* حرکت نرم ۱ ثانیه‌ای */
+            transition: all 1s ease-out; 
         }
 
-        /* کلاسی که باعث ظاهر شدنِ منشور می‌شود */
         .artifact-section.in-view {
             opacity: 1; 
             transform: translateY(0); 
         }
-        /* استایل‌های متن و عکس (بدون تغییر) */
         .artifact-section .section-title { font-family: 'Cinzel', serif; color: var(--royal-gold); font-size: 2.5rem; margin-bottom: 50px; text-shadow: var(--text-shadow); }
         .artifact-img { max-width: 500px; height: auto; border: none; border-radius: 4px; box-shadow: 0 15px 50px rgba(0,0,0,1), 0 0 30px rgba(212, 175, 55, 0.15); transition: transform 0.3s; }
         .artifact-img:hover { transform: scale(1.04); }
 
-        /* --- جدید: History & Metadata Tabs Section --- */
-        /* ۲. کادرِ دربرگیرنده‌ی هر مقاله */
         .history-article {
             margin-bottom: 90px; 
             padding-bottom: 100px; 
@@ -182,10 +168,9 @@
             text-align: justify;
             min-height: 100vh; 
             height: auto;
-            /* --- جادوی اسکرول: در ابتدا نامرئی و پایین هستند --- */
             opacity: 0;
             transform: translateY(40px);
-            transition: all 0.8s ease-out; /* سرعت ظاهر شدن */
+            transition: all 0.8s ease-out; 
         }
 
         .history-article h2 {
@@ -194,16 +179,15 @@
                 0 0 20px rgba(184, 134, 11, 0.6), 
                 0 0 30px rgba(184, 134, 11, 0.4), 
                 0 2px 4px rgba(0,0,0,0.8);
-            transition: all 0.5s ease; /* برای اینکه درخشش هم نرم ظاهر شود */
+            transition: all 0.5s ease;
         }
-        /* این کلاس وقتی اسکرول بهشون می‌رسه بهشون اضافه میشه */
+
         .history-article.in-view {
             opacity: 1;
             transform: translateY(0);
         }
 
 
-        /* --- About the Project Section (متمایز و متحرک) --- */
         .about-project-section {
             background-color: var(--bg-dark-crimson);
             padding: 90px 0 90px 0;
@@ -211,23 +195,20 @@
             border-bottom: none;
             margin-bottom: 100px;
             scroll-snap-align: center;
-            /* --- تنظیمات انیمیشن --- */
-            opacity: 0; /* اول نامرئی باشه */
-            transform: translateY(30px); /* کمی پایین باشه */
-            transition: all 1s ease-out; /* با سرعت ۱ ثانیه ظاهر بشه */
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: all 1s ease-out; 
         }
 
-        /* کلاسی که جاوااسکریپت موقع اسکرول اضافه می‌کنه */
         .about-project-section.in-view {
             opacity: 1; 
             transform: translateY(0); 
         }
 
-        /* --- کادر فیروزه‌ایِ جدید --- */
         .about-container {
-            border: 4px double #008080; /* کادر دوتایی فیروزه‌ای */
+            border: 4px double #008080; 
             border-radius: 8px;
-            background: rgba(0, 128, 128, 0.08); /* پس‌زمینه محو فیروزه‌ای */
+            background: rgba(0, 128, 128, 0.08); 
             padding: 80px; 
             max-width: 900px; 
             margin: 0 auto; 
@@ -236,7 +217,7 @@
 
         .about-project-title {
             font-family: 'Cinzel', serif;
-            color: #008080; /* رنگ تیتر هم فیروزه‌ای شد */
+            color: #008080;
             font-size: 2rem;
             font-weight: 600;
             margin-bottom: 55px;
@@ -252,7 +233,6 @@
             color: var(--pale-gold);
         }
 
-        /* --- Buttons & Features --- */
         .btn-gold {
             background-color: var(--royal-gold);
             color: #2b0303 !important; 
@@ -273,7 +253,6 @@
         }
         .btn-outline-gold:hover { background-color: var(--royal-gold); color: #2b0303 !important; }
 
-        /* --- Author & Footer --- */
         .author-section {
             background-color: #1a0101; 
             padding: 80px 0;
@@ -295,7 +274,6 @@
             font-size: 0.9rem;
         }
 
-        /* --- Music Player Button --- */
         .music-toggle {
             position: fixed; bottom: 30px; right: 30px;
             background-color: var(--bg-dark-crimson); color: var(--royal-gold);
@@ -306,26 +284,22 @@
         }
         .music-toggle:hover { background-color: var(--royal-gold); color: var(--bg-dark-crimson); transform: scale(1.05); }
         
-        /* --- New: Portrait Image Style for Cyrus --- */
         .portrait-img {
             max-width: 100%;
             height: auto;
             border-radius: 4px;
-            /* کادر و سایه‌ای ظریف، هماهنگ با بقیه‌ی عکس‌ها */
             border: 1px solid var(--royal-gold);
             box-shadow: 0 5px 20px rgba(0,0,0,0.5);
             margin-bottom: 20px;
-            transition: all 0.4s ease; /* برای حرکت نرم */
+            transition: all 0.4s ease;
         }
 
-
         .portrait-img:hover:hover {
-            transform: perspective 1000px scale(1.03) rotateY(10deg); /* عکس کمی جلو می‌آید و به چپ خم می‌شود */
-            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.7); /* هاله‌ی طلایی درخشان‌تر می‌شود */
-            filter: brightness(1.05); /* کمی روشن‌تر می‌شود */
+            transform: perspective 1000px scale(1.03) rotateY(10deg);
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.7);
+            filter: brightness(1.05);
         }        
 
-        /* ۱. پایین‌ترین لایه: کادر اصلی غبارها (لایه ۵) */
         #magic-dust-container {
             position: fixed; 
             top: 0; left: 0;
@@ -335,7 +309,6 @@
             z-index: 5; 
         }
 
-        /* ۲. لایه میانی: محتوای متنی (لایه ۲۰) + تنظیمات انیمیشن */
         .artifact-section > .container,
         .about-project-section > .container {
             position: relative;
@@ -345,14 +318,12 @@
             transition: all 1s ease-out;
         }
 
-        /* اجرای انیمیشنِ محتوای لایه ۲۰ هنگام اسکرول */
         .artifact-section.in-view > .container,
         .about-project-section.in-view > .container {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* بقیه محتواها که انیمیشن ندارند اما باید در لایه ۲۰ باشند */
         .history-section > .container,
         .author-section > .container,
         footer > .container {
@@ -360,7 +331,6 @@
             z-index: 20; 
         }
         
-        /* ۳. بالاترین لایه: قفل کردنِ تمام عکس‌های حیاتی (لایه ۹۹) */
         .artifact-img, 
         .portrait-img, 
         .hormuzd-portrait-img, 
@@ -369,7 +339,6 @@
             z-index: 99 !important; 
         }
 
-        /* --- استایل و حرکتِ خودِ غبارها --- */
         .dust-particle { 
             position: absolute; 
             background-color: var(--royal-gold); 
@@ -388,11 +357,7 @@
             90% { opacity: 0.7; }
             100% { transform: translateY(-130vh) translateX(-10vw) rotate(720deg); opacity: 0; }
         }
-        /* ========================================= */
-        /* استایل دکمه‌ها و طومارِ دینامیک (از پایین) */
-        /* ========================================= */
         
-        /* --- کانتینرِ هوشمندِ دکمه‌ها (اصلاح شده) --- */
         .royal-controls-wrapper {
             position: fixed;
             bottom: 30px;
@@ -407,10 +372,9 @@
             box-shadow: 0 5px 25px rgba(0,0,0,0.8);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             overflow: hidden;
-            width: 120px; /* عرض اولیه */
+            width: 120px;
         }
 
-        /* وقتی کلاس active اضافه بشه عرض زیاد میشه */
         .royal-controls-wrapper.active {
             width: 210px; 
             border-color: var(--royal-gold);
@@ -433,7 +397,6 @@
 
         .control-btn:hover { color: var(--pale-gold); transform: scale(1.05); }
 
-        /* جداکننده ظریف */
         .divider {
             width: 1px;
             height: 25px;
@@ -443,7 +406,6 @@
 
         .royal-controls-wrapper.active .divider { display: block; }
 
-        /* دکمه لیریکس در حالت عادی پنهان در کادر */
         #lyrics-btn-trigger {
             color: var(--pale-gold);
             visibility: hidden;
@@ -468,42 +430,34 @@
             padding-bottom: 40px;
         }
         
-        /* تنظیمات پایه برای حرکت نرم خطوط */
         .lyric-original span {
             font-family: 'Noto Nastaliq Urdu', serif;
             font-size: 1.2rem;
             line-height: 2.8;
             transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
-            display: inline-block; /* برای اینکه زوم بشه */
+            display: inline-block; 
         }
 
-        /* این کلاس وقتی آهنگ به خط میرسه اضافه میشه */
-        /* کلاسِ بهینه‌شده و شاهانه (درخششِ طلاییِ اصیل) */
         .highlight-glow {
-            color:var(--royal-gold) !important; /* کلمه در حال پخش، سفید/کرمِ روشن میشه تا کاملاً خوانا باشه */
+            color:var(--royal-gold) !important;
             text-shadow: 
-                0 0 10px rgba(184, 134, 11, 0.9), /* یک هاله‌ی غلیظِ طلاییِ تاریک (Royal Gold) دور کلمه */
-                0 0 25px rgba(184, 134, 11, 0.5) !important; /* پخش شدنِ ملایمِ نور در پس‌زمینه */
-            transform: scale(1.04); /* کلمه یه کوچولو و خیلی نرم میاد جلو */
+                0 0 10px rgba(184, 134, 11, 0.9),
+                0 0 25px rgba(184, 134, 11, 0.5) !important; 
+            transform: scale(1.04); 
             transition: all 0.4s ease;
         }
 
-        /* تنظیمات پایه برای ترجمه انگلیسی */
         .lyric-translation span {
             transition: color 0.3s ease, text-shadow 0.3s ease, opacity 0.3s ease;
-            opacity: 0.6; /* در حالت عادی کمی محوتر باشد */
+            opacity: 0.6;
         }
 
-        /* این کلاس همزمان با خط فارسی به ترجمه اضافه می‌شود */
         .highlight-glow-translation {
-            color: var(--pale-gold) !important; /* رنگ کرم روشن */
+            color: var(--pale-gold) !important;
             text-shadow: 0 0 10px rgba(184, 134, 11, 0.7) !important;
-            opacity: 1 !important; /* کاملاً نمایان شود */
+            opacity: 1 !important;
         }
 
-        /* =========================================
-           PAHLAVI ERA (CONTEMPORARY MONTAGE)
-           ========================================= */
         .contemporary-montage {
             position: relative;
             min-height: 100vh;
@@ -537,14 +491,12 @@
             z-index: 0;
         }
 
-        /* --- ستون عکس‌ها --- */
         .collage-column {
             position: relative;
             z-index: 1; 
             padding: 50px;
         }
 
-        /* --- ستون متن (یکپارچه و سینمایی) --- */
         .text-column {
             position: relative;
             z-index: 1; 
@@ -553,17 +505,16 @@
             color: #f0f0f0; 
             line-height: 2.2;
             text-align: justify;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.9); /* سایه برای خوانایی روی تصویر */
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.9); 
         }
 
         .text-column .lead {
             font-size: 1.25rem;
             font-weight: 500;
-            color: var(--royal-gold); /* رنگ طلایی برای درخشش روی پس‌زمینه تیره */
+            color: var(--royal-gold);
             margin-bottom: 25px;
         }
 
-        /* --- تنظیمات گالری پراکنده --- */
         .scattered-gallery {
             position: relative;
             width: 100%;
@@ -586,14 +537,12 @@
             object-fit: cover;
         }
 
-        /* --- موقعیت عکس‌ها --- */
         .scattered-1 { width: 360px; height: 470px; top: 150px; left: 10px; z-index: 4; }
         .scattered-2 { width: 310px; height: 400px; top: 110px; left: 370px; z-index: 1; }
         .scattered-3 { width: 420px; height: 270px; top: 510px; left: 150px; z-index: 2; }
         .scattered-4 { width: 280px; height: 370px; top: 400px; left: 550px; z-index: 3; }
         .scattered-5 { width: 300px; height: 410px; top: 730px; left: 300px; z-index: 3; }
 
-        /* --- افکت‌های تعاملی --- */
         .scattered-gallery:hover .photo-item:not(:hover) {
             opacity: 0.3; 
             filter: grayscale(100%) blur(3px);
@@ -607,8 +556,6 @@
             box-shadow: 15px 25px 40px rgba(0,0,0,0.9);
         }
         
-
-        /* --- ستون متن (سمت راست) --- */
         .text-column {
             padding: 80px 60px;
             font-family: 'Lora', serif;
@@ -626,11 +573,11 @@
 
         .pasargad-divider {
             position: relative;
-            height: 450px; /* ارتفاعِ عکسِ جداکننده */
+            height: 450px;
             background-image: url('pasargad.png'); 
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* افکت پارالکس: عکس ثابت می‌ماند */
+            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -644,18 +591,17 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(43, 3, 3, 0.6); /* یک فیلتر شرابی/تاریک روی عکس برج */
+            background: rgba(43, 3, 3, 0.6);
             z-index: 1;
         }
 
-        /* --- Time Divider: Azadi Tower --- */
         .time-divider {
             position: relative;
-            height: 450px; /* ارتفاعِ عکسِ جداکننده */
-            background-image: url('azadi_tower.jpg'); /* اسم عکس برج آزادی */
+            height: 450px;
+            background-image: url('azadi_tower.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* افکت پارالکس: عکس ثابت می‌ماند */
+            background-attachment: fixed; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -669,7 +615,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(43, 3, 3, 0.6); /* یک فیلتر شرابی/تاریک روی عکس برج */
+            background: rgba(43, 3, 3, 0.6);
             z-index: 1;
         }
 
@@ -684,27 +630,23 @@
             opacity: 0.5 !important;
         }
 
-        /* =========================================
-           THEORETICAL MODEL SECTION
-           ========================================= */
         .theoretical-model-section {
-            font-family: 'Lora', serif; /* فونت هماهنگ با بقیه متن‌های سایت */
+            font-family: 'Lora', serif;
             line-height: 1.8;
             position: relative; 
             z-index: 10;
-            color: var(--pale-gold); /* رنگ متن روشن روی پس‌زمینه تاریک */
-            background-color: rgba(15, 0, 0, 0.85); /* پس‌زمینه تیره هماهنگ با تم */
+            color: var(--pale-gold);
+            background-color: rgba(15, 0, 0, 0.85);
             max-width: 1000px;
             margin: 60px auto;
             padding: 40px;
-            border: 1px solid rgba(184, 134, 11, 0.3); /* حاشیه ظریف طلایی */
+            border: 1px solid rgba(184, 134, 11, 0.3);
             border-radius: 12px;
             box-shadow: inset 0 5px 20px rgba(0,0,0,0.9), 0 10px 30px rgba(0,0,0,0.6);
             transition: all 0.4s ease;
             text-align: justify;
         }
 
-        /* افکت بزرگ شدنِ کل باکس وقتی موس روی آن می‌رود */
         .theoretical-model-section:hover {
             transform: translateY(-5px);
             box-shadow: inset 0 5px 20px rgba(0,0,0,0.9), 0 15px 40px rgba(0,0,0,0.8);
@@ -721,7 +663,6 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
-        /* --- جادوی زوم عکس --- */
         .model-image {
             max-width: 100%;
             height: auto;
@@ -734,21 +675,14 @@
             z-index: 8;
         }
 
-        /* وقتی موس روی عکس می‌رود، ۱.۶ برابر بزرگ می‌شود و می‌آید روی بقیه اجزا */
         .model-image:hover {
             transform: scale(1.5);
             box-shadow: 0 20px 50px rgba(0,0,0,1);
         }
 
-        /* =========================================
-           KNOWLEDGE GRAPH TRIPLES TABLE
-           ========================================= */
-        /* =========================================
-           جدول سه‌گانه‌ها - تم مینیمال و تاریک
-           ========================================= */
         .uri-documentation-box {
-            background-color: rgba(10, 0, 0, 0.95); /* پس‌زمینه کمی تاریک‌تر و عمیق‌تر */
-            border: 1px solid rgba(184, 134, 11, 0.5); /* حاشیه طلایی ظریف‌تر شد */
+            background-color: rgba(10, 0, 0, 0.95); 
+            border: 1px solid rgba(184, 134, 11, 0.5); 
             border-radius: 12px;
             padding: 35px;
             margin: 40px auto;
@@ -757,36 +691,32 @@
             direction: ltr;
         }
 
-        /* تیتر دسته‌بندی‌ها */
         .uri-category {
             font-family: 'Cinzel', serif;
             color: var(--royal-gold);
-            border-bottom: 1px solid rgba(184, 134, 11, 0.2); /* خط زیرین خیلی محو و شیک شد */
+            border-bottom: 1px solid rgba(184, 134, 11, 0.2); 
             padding-bottom: 8px;
             margin: 30px 0 20px 0;
             font-size: 1.4rem;
             text-align: left;
         }
 
-        /* ظرف اصلی جدول */
         .triples-scroll-area {
             max-height: 400px;
             overflow-y: auto;
-            overflow-x: auto; /* برای جلوگیری از به هم ریختن آدرس‌های طولانی */
+            overflow-x: auto;
             border: 1px solid rgba(184, 134, 11, 0.2);
             border-radius: 6px;
             margin-top: 20px;
-            background: rgba(5, 0, 0, 0.8); /* بک‌گراند تاریک دقیقاً مثل کنسول کد */
+            background: rgba(5, 0, 0, 0.8);
             -webkit-overflow-scrolling: touch; 
         }
 
-        /* --- نوار اسکرول شخصی‌سازی‌شده (طلایی و تاریک) --- */
         .triples-scroll-area::-webkit-scrollbar { width: 8px; height: 8px; }
         .triples-scroll-area::-webkit-scrollbar-track { background: #050000; border-radius: 4px; }
         .triples-scroll-area::-webkit-scrollbar-thumb { background: rgba(184, 134, 11, 0.5); border-radius: 4px; }
         .triples-scroll-area::-webkit-scrollbar-thumb:hover { background: var(--royal-gold); }
 
-        /* جدول */
         .uri-table {
             width: 100%;
             border-collapse: collapse;
@@ -795,11 +725,10 @@
             margin: 0; 
         }
 
-        /* هدر جدول - تغییر از نوار طلایی به نوار تاریک مینیمال */
         .uri-table th {
-            background-color: rgba(15, 0, 0, 0.95); /* پس‌زمینه تاریک شد */
-            color: var(--royal-gold); /* متن طلایی شد */
-            border-bottom: 1px solid rgba(184, 134, 11, 0.5); /* یک خط طلایی ظریف زیر هدر */
+            background-color: rgba(15, 0, 0, 0.95); 
+            color: var(--royal-gold); 
+            border-bottom: 1px solid rgba(184, 134, 11, 0.5); 
             position: sticky;
             top: 0;
             padding: 12px;
@@ -807,41 +736,34 @@
             z-index: 10;
         }
 
-        /* ردیف‌های جدول */
         .uri-table td {
             padding: 10px;
-            border-bottom: 1px solid rgba(184, 134, 11, 0.05); /* خطوط بین ردیف‌ها بسیار نامحسوس شد */
+            border-bottom: 1px solid rgba(184, 134, 11, 0.05); 
             color: var(--pale-gold);
             word-break: break-all;
         }
 
-        /* افکت هاور بسیار ملایم (حذف رنگ جیغ فیروزه‌ای) */
         .uri-table tr:hover {
-            background: rgba(184, 134, 11, 0.08); /* یه هاله طلایی خیلی محو می‌ندازه */
+            background: rgba(184, 134, 11, 0.08);
         }
 
-        /* مقادیر متنی */
         .literal-value {
             font-size: 1rem;
             color: var(--persian-turquoise);
             font-style: italic;
         }
 
-        /* =========================================
-           استایل اختصاصی برای اسکرولِ کنسول کد (Turtle)
-           ========================================= */
         .rdf-code-area {
-            max-height: 460px; /* تعیین ارتفاع برای ظاهر شدن اسکرول */
-            overflow-y: auto;  /* اسکرول عمودی */
+            max-height: 460px; 
+            overflow-y: auto; 
             overflow-x: auto;
             padding: 20px;
             margin: 10px;
             border: 2px solid rgba(184, 134, 11, 0.4);
-            background-color: rgba(5, 0, 0, 0.8); /* بک‌گراند تیره برای کادر کد */
+            background-color: rgba(5, 0, 0, 0.8); 
             border-radius: 10px;
         }
 
-        /* زیباسازی نوار اسکرول برای کنسول کد */
         .rdf-code-area::-webkit-scrollbar { 
             width: 8px; 
             height: 8px; 
@@ -853,12 +775,12 @@
         }
         
         .rdf-code-area::-webkit-scrollbar-thumb { 
-            background: rgba(184, 134, 11, 0.5); /* رنگ طلایی نیمه‌شفاف */
+            background: rgba(184, 134, 11, 0.5); 
             border-radius: 4px; 
         }
         
         .rdf-code-area::-webkit-scrollbar-thumb:hover { 
-            background: var(--royal-gold); /* روشن شدن در حالت هاور */
+            background: var(--royal-gold);
         }
     </style>
 </head>

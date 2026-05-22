@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-import csv # ماژول جدید برای خواندن فایل اکسترنال
+import csv 
 from rdflib import Graph, Namespace
 from rdflib.namespace import RDFS, OWL, RDF
 from rdflib import URIRef, Literal
@@ -175,9 +175,7 @@ for obj_node in root.findall('.//tei:object', tei_ns):
 
 print(f"Extracted a total of {entity_count} entities (from XML and CSV).")
 
-# ==========================================
-# ۵. ساختن روابط سه‌گانه (Triples) از listRelation
-# ==========================================
+
 for rel in root.findall('.//tei:relation', tei_ns):
     active = rel.get('active')
     name = rel.get('name')
