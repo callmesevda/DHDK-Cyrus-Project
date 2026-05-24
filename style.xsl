@@ -1,51 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
-
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:tei="http://www.tei-c.org/ns/1.0"
     exclude-result-prefixes="tei">
 
     <xsl:output method="html" encoding="UTF-8" indent="yes"/>
 
+    <xsl:template name="clean-name">
+        <xsl:param name="raw-text"/>
+        
+        <xsl:variable name="clean-id" select="substring-after($raw-text, '#')"/>
+
+        <xsl:choose>
+            <xsl:when test="starts-with($raw-text, '#') and //tei:person[@xml:id=$clean-id]/tei:persName">
+                <xsl:value-of select="//tei:person[@xml:id=$clean-id]/tei:persName"/>
+            </xsl:when>
+            
+            <xsl:when test="starts-with($raw-text, '#') and //tei:place[@xml:id=$clean-id]/tei:placeName">
+                <xsl:value-of select="//tei:place[@xml:id=$clean-id]/tei:placeName"/>
+            </xsl:when>
+            
+            <xsl:when test="starts-with($raw-text, '#') and //tei:org[@xml:id=$clean-id]/tei:orgName">
+                <xsl:value-of select="//tei:org[@xml:id=$clean-id]/tei:orgName"/>
+            </xsl:when>
+
+            <xsl:when test="starts-with($raw-text, '#') and //*[@xml:id=$clean-id]/tei:label">
+                <xsl:value-of select="//*[@xml:id=$clean-id]/tei:label"/>
+            </xsl:when>
+
+            <xsl:when test="starts-with($raw-text, '#')">
+                <xsl:value-of select="translate(substring-after($raw-text, '#'), '_', ' ')"/>
+            </xsl:when>
+
+            <xsl:when test="contains($raw-text, 'ext:')">
+                <xsl:value-of select="translate(substring-after($raw-text, 'ext:'), '_', ' ')"/>
+            </xsl:when>
+
+            <xsl:when test="contains($raw-text, 'crm:')">
+                <xsl:value-of select="translate(substring-after($raw-text, 'crm:'), '_', ' ')"/>
+            </xsl:when>
+            <xsl:when test="contains($raw-text, 'schema:')">
+                <xsl:value-of select="translate(substring-after($raw-text, 'schema:'), '_', ' ')"/>
+            </xsl:when>
+
+            <xsl:otherwise><xsl:value-of select="$raw-text"/></xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <xsl:template match="/">
         <html>
             <head>
-                <title>Knowledge Graph Data - Cyrus Cylinder</title>
+                <title>Knowledge Graph Data - Cyrus Cylinder</title>     
                 <style>
-                    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background-color: #f4f4f9; color: #333; }
-                    h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-                    .container { max-width: 1000px; margin: 0 auto; background: #fff; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; }
-                    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-                    th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-                    th { background-color: #3498db; color: white; font-weight: bold; }
-                    tr:nth-child(even) { background-color: #f9f9f9; }
-                    tr:hover { background-color: #f1f1f1; }
-                    .tag { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.9em; background-color: #e8f4f8; border: 1px solid #bce8f1; }
+                    table { 
+                        border-collapse: collapse; 
+                        width: 100%; 
+                        table-layout: fixed;
+                    }
+                    
+                    th, td { 
+                        border-bottom: 1px solid #eeeeee; 
+                        padding: 10px 10px; 
+                        text-align: left; 
+                        word-wrap: break-word;
+                    }
                 </style>
             </head>
             <body>
-                <div class="container">
-                    <h1>Extracted Entities and Relationships</h1>
-                    <p>This table displays the semantic relationships extracted from the TEI XML file.</p>
-                    
+                <div class="container">                    
                     <table>
                         <tr>
-                            <th>Subject (Active)</th>
-                            <th>Predicate (Name)</th>
-                            <th>Object (Passive)</th>
+                            <th>Subject (Active Entity)</th>
+                            <th>Predicate (Relation Type)</th>
+                            <th>Object (Passive Entity)</th>
                         </tr>
-                        
-                        <xsl:for-each select="//tei:relation">
-                            <tr>
-                                <td><span class="tag"><xsl:value-of select="@active"/></span></td>
-                                <td><strong><xsl:value-of select="@name"/></strong></td>
-                                <td><span class="tag"><xsl:value-of select="@passive"/></span></td>
-                            </tr>
-                        </xsl:for-each>
+
+                        <xsl:if test="//tei:relation[@active = //tei:persName/@ref or substring-after(@active, '#') = //tei:person/@xml:id]">
+                            <xsl:for-each select="//tei:relation[@active = //tei:persName/@ref or substring-after(@active, '#') = //tei:person/@xml:id]">
+                                <xsl:call-template name="print-row"/>
+                            </xsl:for-each>
+                        </xsl:if>
+
+                        <xsl:if test="//tei:relation[@active = //tei:placeName/@ref or substring-after(@active, '#') = //tei:place/@xml:id]">
+                            <xsl:for-each select="//tei:relation[@active = //tei:placeName/@ref or substring-after(@active, '#') = //tei:place/@xml:id]">
+                                <xsl:call-template name="print-row"/>
+                            </xsl:for-each>
+                        </xsl:if>
+
+                        <xsl:if test="//tei:relation[@active = //tei:orgName/@ref or substring-after(@active, '#') = //tei:org/@xml:id]">
+                            <xsl:for-each select="//tei:relation[@active = //tei:orgName/@ref or substring-after(@active, '#') = //tei:org/@xml:id]">
+                                <xsl:call-template name="print-row"/>
+                            </xsl:for-each>
+                        </xsl:if>
+
+                        <xsl:if test="//tei:relation[starts-with(@active, '#') and 
+                            not(@active = //tei:persName/@ref or substring-after(@active, '#') = //tei:person/@xml:id) and 
+                            not(@active = //tei:placeName/@ref or substring-after(@active, '#') = //tei:place/@xml:id) and 
+                            not(@active = //tei:orgName/@ref or substring-after(@active, '#') = //tei:org/@xml:id)]">
+                            <xsl:for-each select="//tei:relation[starts-with(@active, '#') and 
+                                not(@active = //tei:persName/@ref or substring-after(@active, '#') = //tei:person/@xml:id) and 
+                                not(@active = //tei:placeName/@ref or substring-after(@active, '#') = //tei:place/@xml:id) and 
+                                not(@active = //tei:orgName/@ref or substring-after(@active, '#') = //tei:org/@xml:id)]">
+                                <xsl:call-template name="print-row"/>
+                            </xsl:for-each>
+                        </xsl:if>
+
+                        <xsl:if test="//tei:relation[starts-with(@active, 'ext:')]">
+                            <xsl:for-each select="//tei:relation[starts-with(@active, 'ext:')]">
+                                <xsl:call-template name="print-row"/>
+                            </xsl:for-each>
+                        </xsl:if>
+
                     </table>
                 </div>
             </body>
         </html>
+    </xsl:template>
+
+    <xsl:template name="print-row">
+        <tr>
+            <td>
+                <xsl:call-template name="clean-name">
+                    <xsl:with-param name="raw-text" select="@active"/>
+                </xsl:call-template>
+            </td>
+            <td>
+                <xsl:call-template name="clean-name">
+                    <xsl:with-param name="raw-text" select="@name"/>
+                </xsl:call-template>
+            </td>
+            <td>
+                <xsl:call-template name="clean-name">
+                    <xsl:with-param name="raw-text" select="@passive"/>
+                </xsl:call-template>
+            </td>
+        </tr>
     </xsl:template>
 
 </xsl:stylesheet>

@@ -9,7 +9,6 @@ g = Graph()
 CRM = Namespace("http://www.cidoc-crm.org/cidoc-crm/")
 SCHEMA = Namespace("http://schema.org/")
 SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
-DCTERMS = Namespace("http://purl.org/dc/terms/")
 FRBROO = Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/")
 DATA = Namespace("http://www.unibo.it/cyrus-kg/data/")
 EXT = Namespace("http://www.unibo.it/cyrus-kg/external/") 
@@ -17,7 +16,6 @@ EXT = Namespace("http://www.unibo.it/cyrus-kg/external/")
 g.bind("crm", CRM)
 g.bind("schema", SCHEMA) 
 g.bind("skos", SKOS)
-g.bind("dcterms", DCTERMS)
 g.bind("frbroo", FRBROO)
 g.bind("data", DATA)
 g.bind("ext", EXT)
@@ -40,7 +38,6 @@ def resolve_uri(value):
         if prefix == 'crm': return CRM[name]
         if prefix == 'frbroo': return FRBROO[name]
         if prefix == 'skos': return SKOS[name]
-        if prefix == 'dcterms': return DCTERMS[name]
         
     raise ValueError(f"Unknown prefix or format in: {value}")
 
@@ -170,8 +167,6 @@ for obj_node in root.findall('.//tei:object', tei_ns):
                 
                 if text_val.startswith('http'):
                     g.add((entity_uri, SKOS.exactMatch, URIRef(text_val)))
-                else:
-                    g.add((entity_uri, DCTERMS.identifier, Literal(f"{label_prefix}: {text_val}")))
 
 print(f"Extracted a total of {entity_count} entities (from XML and CSV).")
 

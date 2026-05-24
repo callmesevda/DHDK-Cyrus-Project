@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Cyrus Cylinder | LOD Project</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
-    
     <style>
 
         html {
@@ -43,7 +41,6 @@
             text-shadow: var(--text-shadow);
         }
 
-        /* --- Custom Navbar Style --- */
         .navbar-royal {
             background-color: rgba(0, 0, 0, 0.7); 
             border-bottom: 1px solid var(--royal-gold);
@@ -60,7 +57,6 @@
             color: var(--royal-gold) !important;
         }
 
-        /* --- Imperial Hero Section --- */
         .hero-section {
             position: relative; 
             z-index: 10;        
@@ -88,7 +84,6 @@
             margin-bottom: 20px; 
             letter-spacing: 2px;
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
         .hero-title:hover {
@@ -146,7 +141,8 @@
             padding: 200px 0; 
             text-align: center;
             border: none; 
-            transition: all 1s ease-out; 
+            transition: all 3s ease-out; 
+            transform: translateY(30); 
         }
 
         .artifact-section.in-view {
@@ -198,7 +194,7 @@
             scroll-snap-align: center;
             opacity: 0; 
             transform: translateY(30px); 
-            transition: all 1s ease-out; 
+            transition: all 3s ease-out; 
         }
 
         .about-project-section.in-view {
@@ -234,16 +230,6 @@
             color: var(--pale-gold);
         }
 
-        .btn-gold {
-            background-color: var(--royal-gold);
-            color: #2b0303 !important; 
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            border: 2px solid #2b0303;
-            transition: all 0.3s;
-        }
-        .btn-gold:hover { background-color: transparent; color: var(--royal-gold) !important; border-color: var(--royal-gold); }
-
         .btn-outline-gold {
             background-color: transparent;
             color: var(--royal-gold) !important;
@@ -261,10 +247,9 @@
             margin-top: 80px;
         }
         .author-card { display: flex; align-items: center; justify-content: center; gap: 40px; max-width: 800px; margin: 0 auto; text-align: left; }
-        .author-img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 2px solid var(--royal-gold); box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
-        .author-info h3 { font-family: 'Cinzel', serif; color: var(--royal-gold); margin-bottom: 10px; font-size: 1.8rem; }
+        .author-img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 1.5px solid var(--royal-gold); box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
+        .author-info h3 { font-family: 'Cinzel', serif; color: var(--royal-gold); margin-bottom: 10px; font-size: 1.6rem; }
         .author-info p { font-size: 1.1rem; line-height: 1.6; margin: 0; text-align: justify;}
-        @media (max-width: 768px) { .author-card { flex-direction: column; text-align: center; } }
 
         .footer-royal {
             background-color: rgba(0, 0, 0, 0.9);
@@ -274,16 +259,6 @@
             font-family: 'Cinzel', serif;
             font-size: 0.9rem;
         }
-
-        .music-toggle {
-            position: fixed; bottom: 30px; right: 30px;
-            background-color: var(--bg-dark-crimson); color: var(--royal-gold);
-            border: 2px solid var(--royal-gold); padding: 12px 20px;
-            border-radius: 50px; font-family: 'Cinzel', serif; font-size: 1rem;
-            cursor: pointer; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-            transition: all 0.3s ease;
-        }
-        .music-toggle:hover { background-color: var(--royal-gold); color: var(--bg-dark-crimson); transform: scale(1.05); }
         
         .portrait-img {
             max-width: 100%;
@@ -296,7 +271,7 @@
         }
 
         .portrait-img:hover:hover {
-            transform: perspective 1000px scale(1.03) rotateY(10deg);
+            transform: perspective 1000px scale(1.03);
             box-shadow: 0 10px 30px rgba(184, 134, 11, 0.7);
             filter: brightness(1.05);
         }        
@@ -334,7 +309,6 @@
         
         .artifact-img, 
         .portrait-img, 
-        .hormuzd-portrait-img, 
         .cyrus-texture-img {
             position: relative !important;
             z-index: 99 !important; 
@@ -363,7 +337,7 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            z-index: 1000000;
+            z-index: 1000;
             display: flex;
             align-items: center;
             background-color: var(--bg-dark-crimson);
@@ -378,7 +352,6 @@
 
         .royal-controls-wrapper.active {
             width: 210px; 
-            border-color: var(--royal-gold);
         }
 
         .control-btn {
@@ -557,20 +530,6 @@
             box-shadow: 15px 25px 40px rgba(0,0,0,0.9);
         }
         
-        .text-column {
-            padding: 80px 60px;
-            font-family: 'Lora', serif;
-            color: #ffffffeb;
-            line-height: 1.9;
-            text-align: justify;
-        }
-
-        .text-column .lead {
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: #000;
-            margin-bottom: 25px;
-        }
 
         .pasargad-divider {
             position: relative;
@@ -649,7 +608,7 @@
         }
 
         .theoretical-model-section:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             box-shadow: inset 0 5px 20px rgba(0,0,0,0.9), 0 15px 40px rgba(0,0,0,0.8);
             border-color: var(--royal-gold);
         }
@@ -670,7 +629,7 @@
             border-radius: 6px;
             margin-bottom: 90px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-            cursor: zoom-in; /* تغییر شکل موس به ذره‌بین */
+            cursor: zoom-in;
             transition: transform 0.8s ease, box-shadow 0.5s ease;
             position: relative;
             z-index: 8;
@@ -745,7 +704,7 @@
         }
 
         .uri-table tr:hover {
-            background: rgba(184, 134, 11, 0.08);
+            background: rgba(184, 134, 11, 0.1);
         }
 
         .literal-value {
@@ -765,24 +724,10 @@
             border-radius: 10px;
         }
 
-        .rdf-code-area::-webkit-scrollbar { 
-            width: 8px; 
-            height: 8px; 
-        }
-        
-        .rdf-code-area::-webkit-scrollbar-track { 
-            background: #050000; 
-            border-radius: 4px;
-        }
-        
-        .rdf-code-area::-webkit-scrollbar-thumb { 
-            background: rgba(184, 134, 11, 0.5); 
-            border-radius: 4px; 
-        }
-        
-        .rdf-code-area::-webkit-scrollbar-thumb:hover { 
-            background: var(--royal-gold);
-        }
+        .rdf-code-area::-webkit-scrollbar { width: 8px; height: 8px;}
+        .rdf-code-area::-webkit-scrollbar-track { background: #050000; border-radius: 4px;}
+        .rdf-code-area::-webkit-scrollbar-thumb { background: rgba(184, 134, 11, 0.5); border-radius: 4px; }
+        .rdf-code-area::-webkit-scrollbar-thumb:hover { background: var(--royal-gold);}
     </style>
 </head>
 
@@ -965,6 +910,19 @@
             <img class="model-image" src="conceptual_model.png" alt="Conceptual Model of the Cyrus Cylinder Knowledge Graph">
         </figure>
 
+        <div class="methodology-description">
+            <h3>XML to HTML Transformation Methodology</h3>
+            <p>
+                This table displays the semantic relationships extracted from the TEI/XML file. The primary purpose of XML/TEI is to describe and exchange metadata, but it does not address presentational aspects for web browsers. To make the XML document browsable and accessible to a wider audience, it must be transformed into an HTML document. For this project, XSLT (eXtensible Stylesheet Language Transformations), a declarative language, was used to convert the XML nodes into a structured HTML table. 
+            </p>
+            <p>
+                Behind the scenes, the relationships are logically organized by entity types such as Persons, Places, and Organizations etc. To ensure the knowledge graph is truly user-friendly, the code automatically translates complex machine IDs and ontology prefixes into real, readable names. By seamlessly blending our internal XML data with external authority records, this approach provides a clear and easy-to-read view of the project's semantic network.
+            </p>
+        </div>
+
+        <div class="uri-table triples-scroll-area" id="output">
+            <p>Loading the extracted entities... Please wait.</p>
+        </div>
 
         <div class="container mt-5" id="RDF-production">
             <h2 class="model-title">RDF Production</h2>
@@ -2897,6 +2855,44 @@
                     console.error('Error:', error);
                 });
         });
+
+        function transformXML() {
+            // Load the XML file
+            const xmlFile = "data.xml";
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", xmlFile, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                const xml = xhr.responseXML;
+
+                // Load the XSLT file
+                const xslFile = "style.xsl";
+                const xhrXSLT = new XMLHttpRequest();
+                xhrXSLT.open("GET", xslFile, true);
+                xhrXSLT.onreadystatechange = function () {
+                    if (xhrXSLT.readyState == 4 && xhrXSLT.status == 200) {
+                    const xsl = xhrXSLT.responseXML;
+
+                    // Perform the transformation
+                    if (typeof XSLTProcessor !== "undefined") {
+                        const processor = new XSLTProcessor();
+                        processor.importStylesheet(xsl);
+                        const result = processor.transformToDocument(xml);
+
+                        // Display the transformed HTML
+                        const outputDiv = document.getElementById("output");
+                        outputDiv.innerHTML = new XMLSerializer().serializeToString(result);
+                    } else {
+                        alert("XSLTProcessor not supported by the browser.");
+                    }
+                    }
+                };
+                xhrXSLT.send(null);
+                }
+            };
+            xhr.send(null);
+            }
+            window.onload = transformXML;
 
     </script>
 
